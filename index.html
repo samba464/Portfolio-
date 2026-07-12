@@ -651,7 +651,7 @@
     <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
     <h3>Hire Me</h3>
     <p class="sub">Tell me a bit about the role or project — I'll reply directly by email.</p>
-    <div class="activation-note">
+    <div class="activation-note" id="activationNote">
       <strong>First-time setup:</strong> the very first submission triggers a one-time confirmation email from FormSubmit to reddts16@gmail.com. Open it and click "Activate Form" — after that, every future submission is delivered automatically with no further steps.
     </div>
 
@@ -764,6 +764,7 @@
     if(!formSubmitted) return; // ignore the frame's initial blank load
     formSubmitted = false;
     hireForm.style.display = 'none';
+    document.getElementById('activationNote').style.display = 'none';
     formSuccess.style.display = 'block';
   });
 </script>
