@@ -655,10 +655,11 @@
       <strong>First-time setup:</strong> the very first submission triggers a one-time confirmation email from FormSubmit to reddts16@gmail.com. Open it and click "Activate Form" — after that, every future submission is delivered automatically with no further steps.
     </div>
 
-    <form id="hireForm" action="https://formsubmit.co/ajax/reddts16@gmail.com" method="POST">
+    <form id="hireForm" action="https://formsubmit.co/reddts16@gmail.com" method="POST" target="hidden_form_frame">
       <input type="hidden" name="_subject" value="New Hire Me enquiry — portfolio site">
       <input type="hidden" name="_template" value="table">
       <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="false">
 
       <div class="form-field">
         <label for="fName">Name</label>
@@ -678,14 +679,12 @@
       </div>
       <button type="submit" class="btn btn-primary form-submit" id="hireSubmitBtn">Send Enquiry</button>
       <p class="form-note">Sends directly to reddts16@gmail.com via FormSubmit — no account needed.</p>
-      <div class="form-error" id="formError">
-        <p>Something went wrong sending this automatically — your details weren't lost, just not delivered yet.</p>
-        <a id="mailtoFallback" class="btn btn-ghost" style="width:100%; justify-content:center; margin-top:10px;">Email me directly instead</a>
-      </div>
     </form>
+    <iframe name="hidden_form_frame" id="hiddenFormFrame" style="display:none;" title="form submission target"></iframe>
     <div class="form-success" id="formSuccess">
       ✓ Submitted. Thanks — I'll respond shortly by email.
     </div>
+    <p class="form-note" style="margin-top:16px;">Prefer email directly? <a href="mailto:reddts16@gmail.com" style="color:var(--accent-teal);">reddts16@gmail.com</a></p>
   </div>
 </div>
 
@@ -743,42 +742,29 @@
   overlay.addEventListener('click', (e)=>{ if(e.target === overlay) closeModal(); });
   document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeModal(); });
 
-  // Form submit (AJAX so we can show an inline status instead of navigating away)
+  // Form submit — a real POST to a hidden iframe, not fetch(). This avoids
+  // CORS entirely (the browser doesn't need to read the cross-origin
+  // response, it just needs the POST to go through), which is the most
+  // reliable way to use FormSubmit from a static GitHub Pages site.
   const hireForm = document.getElementById('hireForm');
   const formSuccess = document.getElementById('formSuccess');
-  const formError = document.getElementById('formError');
   const submitBtn = document.getElementById('hireSubmitBtn');
+  const hiddenFrame = document.getElementById('hiddenFormFrame');
+  let formSubmitted = false;
 
-  hireForm.addEventListener('submit', function(e){
-    e.preventDefault();
-    formError.style.display = 'none';
+  hireForm.addEventListener('submit', function(){
+    formSubmitted = true;
     submitBtn.disabled = true;
     submitBtn.textContent = 'Sending…';
+    // Let the browser perform the normal POST to the hidden iframe —
+    // no preventDefault here.
+  });
 
-    const data = new FormData(hireForm);
-    fetch(hireForm.action, { method:'POST', body:data, headers:{ 'Accept':'application/json' } })
-      .then((res)=> res.json().then(json => ({ ok: res.ok, json })))
-      .then(({ ok, json })=>{
-        if(!ok || (json && json.success === 'false')) throw new Error(json && json.message ? json.message : 'Request failed');
-        hireForm.style.display = 'none';
-        formSuccess.style.display = 'block';
-      })
-      .catch((err)=>{
-        console.error('Hire Me form submission failed:', err);
-        // Never auto-redirect on failure — that reads as an unwanted external
-        // navigation. Instead, surface a clear inline message with a manual
-        // fallback the visitor can choose to click themselves.
-        const name = document.getElementById('fName').value;
-        const company = document.getElementById('fCompany').value;
-        const email = document.getElementById('fEmail').value;
-        const details = document.getElementById('fDetails').value;
-        const body = encodeURIComponent(`Name: ${name}\nCompany: ${company}\nEmail: ${email}\n\n${details}`);
-        document.getElementById('mailtoFallback').href = `mailto:reddts16@gmail.com?subject=Hire Me Enquiry&body=${body}`;
-
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Send Enquiry';
-        formError.style.display = 'block';
-      });
+  hiddenFrame.addEventListener('load', function(){
+    if(!formSubmitted) return; // ignore the frame's initial blank load
+    formSubmitted = false;
+    hireForm.style.display = 'none';
+    formSuccess.style.display = 'block';
   });
 </script>
 
