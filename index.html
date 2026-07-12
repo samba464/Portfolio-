@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shiva Reddy — Senior Robotics Trainer &amp; STEM Educator</title>
+<meta name="description" content="Portfolio of Shiva Reddy, Senior Robotics Trainer and STEM Educator specializing in robotics, electronics, IoT and embedded systems education.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0A0E13;
+    --bg-surface: #121821;
+    --bg-surface-2: #1A222D;
+    --border: #232C38;
+    --text: #E7ECF2;
+    --text-muted: #8A96A5;
+    --accent-teal: #4FD8C4;
+    --accent-teal-soft: rgba(79,216,196,0.14);
+    --accent-teal-glow: rgba(79,216,196,0.35);
+    --accent-amber: #FFB454;
+    --amber-soft: rgba(255,180,84,0.14);
+    --radius: 10px;
+    --maxw: 1100px;
+    --ease: cubic-bezier(.22,.61,.36,1);
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter', sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size:64px 64px;
+    opacity:0.18;
+    pointer-events:none;
+    z-index:0;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 0%, transparent 70%);
+  }
+  h1,h2,h3{font-family:'Space Grotesk', sans-serif; font-weight:700; letter-spacing:-0.01em;}
+  a{color:inherit; text-decoration:none;}
+  .mono{font-family:'JetBrains Mono', monospace;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px; position:relative; z-index:1;}
+  ::selection{background:var(--accent-teal-glow); color:#04120F;}
+
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{
+    outline:2px solid var(--accent-teal);
+    outline-offset:3px;
+    border-radius:4px;
+  }
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    backdrop-filter:blur(10px);
+    background:rgba(10,14,19,0.72);
+    border-bottom:1px solid var(--border);
+  }
+  .nav-inner{
+    max-width:var(--maxw); margin:0 auto; padding:16px 28px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .brand{
+    display:flex; align-items:center; gap:10px;
+    font-family:'Space Grotesk'; font-weight:700; font-size:1.05rem; letter-spacing:0.02em;
+  }
+  .brand-node{
+    width:9px; height:9px; border-radius:50%;
+    background:var(--accent-teal);
+    box-shadow:0 0 10px var(--accent-teal-glow);
+    animation:pulse 2.4s infinite ease-in-out;
+  }
+  @keyframes pulse{
+    0%,100%{opacity:1; transform:scale(1);}
+    50%{opacity:0.55; transform:scale(0.82);}
+  }
+  nav.links{display:flex; gap:30px; align-items:center;}
+  .nav-link{
+    font-size:0.86rem; color:var(--text-muted);
+    font-family:'JetBrains Mono'; letter-spacing:0.02em;
+    transition:color .25s var(--ease);
+    position:relative;
+    background:none; border:none; cursor:pointer; padding:0;
+  }
+  .nav-link:hover{color:var(--text);}
+  .nav-link::after{
+    content:""; position:absolute; left:0; bottom:-6px; width:0; height:1px;
+    background:var(--accent-teal); transition:width .3s var(--ease);
+  }
+  .nav-link:hover::after{width:100%;}
+  .nav-cta{
+    padding:9px 18px; border-radius:6px;
+    background:var(--accent-teal); color:#04120F !important;
+    font-weight:600; font-size:0.84rem; font-family:'Inter';
+    border:none; cursor:pointer;
+    transition:transform .2s var(--ease), box-shadow .2s var(--ease);
+  }
+  .nav-cta:hover{transform:translateY(-1px); box-shadow:0 6px 20px var(--accent-teal-glow);}
+  .menu-toggle{display:none; background:none; border:none; color:var(--text); font-size:1.4rem; cursor:pointer;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    min-height:100vh;
+    display:flex; flex-direction:column; justify-content:center;
+    position:relative;
+    padding:140px 0 80px;
+  }
+  .hero-grid{
+    display:grid; grid-template-columns:1.15fr 0.85fr; gap:40px; align-items:center;
+  }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'JetBrains Mono'; font-size:0.78rem; color:var(--accent-teal);
+    border:1px solid var(--accent-teal-soft); background:var(--accent-teal-soft);
+    padding:6px 12px; border-radius:100px; letter-spacing:0.03em;
+    margin-bottom:22px;
+  }
+  .eyebrow::before{content:"●"; font-size:0.6rem;}
+  .hero h1{
+    font-size:clamp(2.4rem, 5.6vw, 4.4rem);
+    line-height:1.04;
+    margin-bottom:20px;
+  }
+  .hero h1 .accent{color:var(--accent-teal);}
+  .hero p.lede{
+    font-size:1.08rem; color:var(--text-muted); max-width:52ch; margin-bottom:34px;
+  }
+  .hero-ctas{display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{
+    display:inline-flex; align-items:center; gap:9px;
+    padding:13px 24px; border-radius:7px;
+    font-weight:600; font-size:0.92rem; cursor:pointer;
+    border:1px solid transparent;
+    transition:transform .2s var(--ease), box-shadow .2s var(--ease), background .2s var(--ease), border-color .2s var(--ease);
+    font-family:'Inter';
+  }
+  .btn-primary{background:var(--accent-teal); color:#04120F;}
+  .btn-primary:hover{transform:translateY(-2px); box-shadow:0 10px 28px var(--accent-teal-glow);}
+  .btn-ghost{background:transparent; color:var(--text); border-color:var(--border);}
+  .btn-ghost:hover{border-color:var(--accent-teal); color:var(--accent-teal); transform:translateY(-2px);}
+
+  .circuit-wrap{position:relative; height:420px;}
+  .circuit-wrap svg{width:100%; height:100%; overflow:visible;}
+  .trace{
+    fill:none; stroke:var(--accent-teal); stroke-width:1.4;
+    stroke-dasharray:6 6000; stroke-dashoffset:6000;
+    animation:draw 2.6s var(--ease) forwards;
+    opacity:0.85;
+  }
+  .trace.amber{stroke:var(--accent-amber);}
+  @keyframes draw{ to{ stroke-dashoffset:0; } }
+  .node{fill:var(--bg-surface); stroke:var(--accent-teal); stroke-width:1.4;}
+  .node.amber{stroke:var(--accent-amber);}
+  .node-dot{fill:var(--accent-teal); animation:pulse 2.6s infinite ease-in-out;}
+  .node-dot.amber{fill:var(--accent-amber); animation-delay:.6s;}
+  .node-label{
+    font-family:'JetBrains Mono'; font-size:11px; fill:var(--text-muted);
+  }
+
+  /* ---------- SECTION SHARED ---------- */
+  section{padding:110px 0; position:relative; border-top:1px solid var(--border);}
+  .section-head{margin-bottom:52px; max-width:640px;}
+  .section-tag{
+    font-family:'JetBrains Mono'; font-size:0.78rem; color:var(--accent-amber);
+    letter-spacing:0.08em; text-transform:uppercase; display:block; margin-bottom:14px;
+  }
+  .section-head h2{font-size:clamp(1.7rem, 3.4vw, 2.5rem); margin-bottom:14px;}
+  .section-head p{color:var(--text-muted); font-size:1.02rem; max-width:56ch;}
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:start;}
+  .about-text p{color:var(--text-muted); margin-bottom:18px; font-size:1rem;}
+  .about-text strong{color:var(--text); font-weight:600;}
+  .stat-strip{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  .stat-card{
+    background:var(--bg-surface); border:1px solid var(--border); border-radius:var(--radius);
+    padding:22px 20px;
+  }
+  .stat-card .num{font-family:'Space Grotesk'; font-size:1.9rem; color:var(--accent-teal); font-weight:700;}
+  .stat-card .label{font-size:0.84rem; color:var(--text-muted); margin-top:4px;}
+
+  /* ---------- EXPERIENCE (accordion) ---------- */
+  .exp-list{display:flex; flex-direction:column; gap:14px;}
+  .exp-item{
+    background:var(--bg-surface); border:1px solid var(--border); border-radius:var(--radius);
+    overflow:hidden; transition:border-color .25s var(--ease);
+  }
+  .exp-item[data-open="true"]{border-color:var(--accent-teal);}
+  .exp-head{
+    width:100%; display:flex; align-items:center; justify-content:space-between; gap:20px;
+    padding:22px 24px; background:none; border:none; cursor:pointer; text-align:left; color:var(--text);
+  }
+  .exp-head-left{display:flex; align-items:center; gap:16px;}
+  .led{
+    width:11px; height:11px; border-radius:50%; flex-shrink:0;
+    background:var(--bg-surface-2); border:1px solid var(--border);
+    transition:background .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease);
+  }
+  .exp-item[data-open="true"] .led{
+    background:var(--accent-amber); box-shadow:0 0 10px var(--amber-soft); border-color:var(--accent-amber);
+  }
+  .exp-role{font-family:'Space Grotesk'; font-weight:600; font-size:1.08rem;}
+  .exp-org{font-family:'JetBrains Mono'; font-size:0.82rem; color:var(--text-muted); margin-top:3px;}
+  .exp-toggle-icon{
+    width:26px; height:26px; border-radius:50%; border:1px solid var(--border);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+    transition:transform .3s var(--ease), border-color .25s var(--ease);
+    color:var(--text-muted);
+  }
+  .exp-item[data-open="true"] .exp-toggle-icon{transform:rotate(45deg); border-color:var(--accent-teal); color:var(--accent-teal);}
+  .exp-body{
+    max-height:0; overflow:hidden; transition:max-height .45s var(--ease);
+  }
+  .exp-body-inner{padding:0 24px 26px 60px;}
+  .exp-body-inner ul{list-style:none; display:flex; flex-direction:column; gap:12px;}
+  .exp-body-inner li{
+    position:relative; padding-left:20px; color:var(--text-muted); font-size:0.96rem;
+  }
+  .exp-body-inner li::before{
+    content:""; position:absolute; left:0; top:9px; width:6px; height:1.4px; background:var(--accent-teal);
+  }
+
+  /* ---------- SKILLS ---------- */
+  .skill-groups{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  .skill-card{
+    background:var(--bg-surface); border:1px solid var(--border); border-radius:var(--radius); padding:26px;
+  }
+  .skill-card h3{
+    font-size:0.78rem; font-family:'JetBrains Mono'; color:var(--accent-teal);
+    text-transform:uppercase; letter-spacing:0.06em; margin-bottom:18px; font-weight:500;
+  }
+  .chip-row{display:flex; flex-wrap:wrap; gap:9px;}
+  .chip{
+    font-family:'JetBrains Mono'; font-size:0.8rem; color:var(--text);
+    border:1px solid var(--border); background:var(--bg-surface-2);
+    padding:7px 12px; border-radius:6px;
+    transition:border-color .2s var(--ease), color .2s var(--ease);
+  }
+  .chip:hover{border-color:var(--accent-teal); color:var(--accent-teal);}
+
+  /* ---------- ACHIEVEMENTS ---------- */
+  .ach-strip{display:grid; grid-template-columns:repeat(2,1fr); gap:18px;}
+  .ach-item{
+    display:flex; gap:16px; padding:22px; background:var(--bg-surface);
+    border:1px solid var(--border); border-radius:var(--radius);
+  }
+  .ach-mark{
+    font-family:'Space Grotesk'; font-weight:700; color:var(--accent-amber); font-size:1.1rem; flex-shrink:0;
+  }
+  .ach-item p{color:var(--text-muted); font-size:0.94rem;}
+
+  /* ---------- CONTACT ---------- */
+  .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center;}
+  .contact-links{display:flex; flex-direction:column; gap:18px; margin-top:28px;}
+  .contact-row{
+    display:flex; align-items:center; gap:14px; padding:16px 18px;
+    background:var(--bg-surface); border:1px solid var(--border); border-radius:var(--radius);
+    transition:border-color .2s var(--ease), transform .2s var(--ease);
+  }
+  .contact-row:hover{border-color:var(--accent-teal); transform:translateX(4px);}
+  .contact-icon{
+    width:36px; height:36px; border-radius:8px; background:var(--accent-teal-soft);
+    display:flex; align-items:center; justify-content:center; color:var(--accent-teal); flex-shrink:0;
+  }
+  .contact-row .txt .k{font-size:0.72rem; color:var(--text-muted); font-family:'JetBrains Mono'; text-transform:uppercase; letter-spacing:0.04em;}
+  .contact-row .txt .v{font-size:0.98rem; font-weight:500;}
+  .lang-strip{display:flex; gap:10px; margin-top:26px;}
+  .lang-chip{
+    font-family:'JetBrains Mono'; font-size:0.78rem; color:var(--text-muted);
+    border:1px solid var(--border); padding:6px 12px; border-radius:100px;
+  }
+
+  /* ---------- MODAL ---------- */
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(6,9,12,0.7); backdrop-filter:blur(6px);
+    display:flex; align-items:center; justify-content:center; z-index:100;
+    opacity:0; pointer-events:none; transition:opacity .3s var(--ease); padding:20px;
+  }
+  .modal-overlay.active{opacity:1; pointer-events:auto;}
+  .modal{
+    background:var(--bg-surface); border:1px solid var(--border); border-radius:14px;
+    width:100%; max-width:460px; padding:34px; position:relative;
+    transform:translateY(16px) scale(0.98); opacity:0; transition:all .35s var(--ease);
+    max-height:88vh; overflow-y:auto;
+  }
+  .modal-overlay.active .modal{transform:translateY(0) scale(1); opacity:1;}
+  .modal-close{
+    position:absolute; top:20px; right:20px; background:none; border:none; color:var(--text-muted);
+    font-size:1.3rem; cursor:pointer; line-height:1;
+  }
+  .modal-close:hover{color:var(--text);}
+  .modal h3{font-size:1.4rem; margin-bottom:6px;}
+  .modal p.sub{color:var(--text-muted); font-size:0.9rem; margin-bottom:16px;}
+  .activation-note{
+    font-size:0.82rem; color:var(--text-muted); background:var(--bg-surface-2);
+    border:1px solid var(--border); border-radius:8px; padding:12px 14px; margin-bottom:22px;
+    line-height:1.5;
+  }
+  .activation-note strong{color:var(--accent-teal);}
+  .form-field{margin-bottom:16px;}
+  .form-field label{
+    display:block; font-family:'JetBrains Mono'; font-size:0.76rem; color:var(--text-muted);
+    text-transform:uppercase; letter-spacing:0.04em; margin-bottom:8px;
+  }
+  .form-field input, .form-field textarea{
+    width:100%; background:var(--bg-surface-2); border:1px solid var(--border); border-radius:7px;
+    padding:12px 14px; color:var(--text); font-family:'Inter'; font-size:0.94rem;
+    transition:border-color .2s var(--ease);
+  }
+  .form-field input:focus, .form-field textarea:focus{border-color:var(--accent-teal); outline:none;}
+  .form-field textarea{resize:vertical; min-height:90px;}
+  .form-submit{width:100%; justify-content:center; margin-top:6px;}
+  .form-note{font-size:0.76rem; color:var(--text-muted); margin-top:14px; text-align:center;}
+  .form-success{
+    display:none; text-align:center; padding:20px 0; color:var(--accent-teal);
+    font-family:'JetBrains Mono'; font-size:0.9rem;
+  }
+  .form-error{
+    display:none; margin-top:16px; padding:16px; border-radius:8px;
+    background:var(--amber-soft); border:1px solid rgba(255,180,84,0.35);
+  }
+  .form-error p{color:var(--text); font-size:0.86rem;}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    padding:36px 0; border-top:1px solid var(--border);
+    display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;
+  }
+  footer p{color:var(--text-muted); font-size:0.82rem; font-family:'JetBrains Mono';}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:860px){
+    nav.links{
+      position:fixed; top:64px; left:0; right:0; background:var(--bg-surface);
+      flex-direction:column; align-items:flex-start; padding:24px 28px; gap:20px;
+      border-bottom:1px solid var(--border);
+      transform:translateY(-130%); transition:transform .35s var(--ease); z-index:49;
+    }
+    nav.links.open{transform:translateY(0);}
+    .menu-toggle{display:block;}
+    .hero-grid{grid-template-columns:1fr;}
+    .circuit-wrap{height:280px; order:-1;}
+    .about-grid, .contact-grid{grid-template-columns:1fr; gap:36px;}
+    .skill-groups{grid-template-columns:1fr;}
+    .ach-strip{grid-template-columns:1fr;}
+    .exp-body-inner{padding-left:24px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+    .trace{stroke-dashoffset:0;}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="#top" class="brand"><span class="brand-node"></span>SHIVA REDDY</a>
+    <nav class="links" id="navLinks">
+      <button type="button" class="nav-link" data-scroll-to="about">About</button>
+      <button type="button" class="nav-link" data-scroll-to="experience">Experience</button>
+      <button type="button" class="nav-link" data-scroll-to="skills">Skills</button>
+      <button type="button" class="nav-link" data-scroll-to="achievements">Achievements</button>
+      <button type="button" class="nav-link" data-scroll-to="contact">Contact</button>
+      <button type="button" class="nav-cta" id="navHireBtn">Hire Me</button>
+    </nav>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero" style="border-top:none; padding-top:150px;">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">AVAILABLE FOR ROBOTICS &amp; STEM INSTRUCTOR ROLES</span>
+        <h1>Teaching machines to think, and students to <span class="accent">build</span>.</h1>
+        <p class="lede">Senior Robotics Trainer and STEM Educator with hands-on experience across electronics, IoT, embedded systems, and technical mentoring — turning circuits and code into confidence for students across India.</p>
+        <div class="hero-ctas">
+          <button class="btn btn-primary" id="heroHireBtn">Hire Me</button>
+          <a class="btn btn-ghost" href="Shiva_Reddy_Resume.pdf" download>Download Resume ↓</a>
+        </div>
+      </div>
+      <div class="circuit-wrap" aria-hidden="true">
+        <svg viewBox="0 0 380 420">
+          <path class="trace" d="M40 40 H180 V120 H320" />
+          <path class="trace amber" d="M40 200 H140 V320 H300 V380" />
+          <path class="trace" d="M320 120 V220 H220 V320" style="animation-delay:.3s" />
+          <path class="trace amber" d="M40 40 V140 H100 V200" style="animation-delay:.5s" />
+
+          <circle class="node" cx="40" cy="40" r="16"></circle>
+          <circle class="node-dot" cx="40" cy="40" r="3.5"></circle>
+          <text class="node-label" x="60" y="44">Arduino</text>
+
+          <circle class="node" cx="320" cy="120" r="16"></circle>
+          <circle class="node-dot" cx="320" cy="120" r="3.5"></circle>
+          <text class="node-label" x="243" y="104">Embedded C</text>
+
+          <circle class="node amber" cx="40" cy="200" r="16"></circle>
+          <circle class="node-dot amber" cx="40" cy="200" r="3.5"></circle>
+          <text class="node-label" x="60" y="204">IoT</text>
+
+          <circle class="node amber" cx="300" cy="380" r="16"></circle>
+          <circle class="node-dot amber" cx="300" cy="380" r="3.5"></circle>
+          <text class="node-label" x="220" y="404">Mentoring</text>
+
+          <circle class="node" cx="220" cy="320" r="16"></circle>
+          <circle class="node-dot" cx="220" cy="320" r="3.5"></circle>
+          <text class="node-label" x="240" y="324">Sensors</text>
+
+          <circle class="node" cx="100" cy="200" r="16"></circle>
+          <circle class="node-dot" cx="100" cy="200" r="3.5"></circle>
+          <text class="node-label" x="60" y="185">Curriculum</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap about-grid">
+      <div>
+        <span class="section-tag">// 01 — About</span>
+        <h2 style="margin-bottom:24px;">Bridging the gap between theory and the workbench.</h2>
+        <div class="about-text">
+          <p>I'm a <strong>Senior Robotics Trainer, STEM Educator, and Soft Skills Trainer</strong> with a background in robotics education, electronics, and IoT fundamentals. My work centers on hands-on, project-based learning — helping students move from understanding a circuit diagram to actually building, debugging, and presenting the thing they made.</p>
+          <p>Alongside technical training, I run <strong>employability and communication workshops</strong> for engineering students across India, covering interview preparation, public speaking, and professional etiquette — because I've seen that great engineers still need to be able to explain their work clearly.</p>
+          <p>I'm currently deepening my specialization in <strong>Robotics and Embedded Systems</strong>, with plans to pursue an M.Tech in the field.</p>
+        </div>
+      </div>
+      <div class="stat-strip">
+        <div class="stat-card"><div class="num">B.Tech</div><div class="label">JNTU Kakinada, 2022</div></div>
+        <div class="stat-card"><div class="num">TESOL</div><div class="label">Certified — PlanetSpark</div></div>
+        <div class="stat-card"><div class="num">3</div><div class="label">Training domains: Robotics, STEM &amp; Soft Skills</div></div>
+        <div class="stat-card"><div class="num">3</div><div class="label">Languages: English, Telugu, Hindi</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="section-tag">// 02 — Experience</span>
+        <h2>Where I've trained, mentored, and built.</h2>
+        <p>Click any role to expand the details. Each position reflects hands-on delivery, not just design of curriculum.</p>
+      </div>
+
+      <div class="exp-list" id="expList">
+
+        <div class="exp-item" data-open="false">
+          <button class="exp-head">
+            <div class="exp-head-left">
+              <span class="led"></span>
+              <div>
+                <div class="exp-role">Senior Robotics Trainer</div>
+                <div class="exp-org">Care Cubs</div>
+              </div>
+            </div>
+            <span class="exp-toggle-icon">+</span>
+          </button>
+          <div class="exp-body">
+            <div class="exp-body-inner">
+              <ul>
+                <li>Deliver robotics, electronics, STEM, and IoT-focused training programs for students.</li>
+                <li>Conduct hands-on practical sessions involving sensors, actuators, microcontrollers, and automation projects.</li>
+                <li>Mentor students in innovation projects, technical competitions, and problem-solving activities.</li>
+                <li>Design engaging learning experiences that bridge theoretical concepts with practical implementation.</li>
+                <li>Support schools and educational institutions in implementing technology-driven learning programs.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="exp-item" data-open="false">
+          <button class="exp-head">
+            <div class="exp-head-left">
+              <span class="led"></span>
+              <div>
+                <div class="exp-role">Senior Robotics Trainer</div>
+                <div class="exp-org">WizKlub</div>
+              </div>
+            </div>
+            <span class="exp-toggle-icon">+</span>
+          </button>
+          <div class="exp-body">
+            <div class="exp-body-inner">
+              <ul>
+                <li>Conducted robotics, coding, and STEM education sessions for students across various age groups.</li>
+                <li>Guided learners in project development using electronics and programming concepts.</li>
+                <li>Delivered experiential learning modules focused on creativity, innovation, and design thinking.</li>
+                <li>Assessed student performance and provided individualized mentoring support.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="exp-item" data-open="false">
+          <button class="exp-head">
+            <div class="exp-head-left">
+              <span class="led"></span>
+              <div>
+                <div class="exp-role">Soft Skills, Communication &amp; Interview Skills Trainer</div>
+                <div class="exp-org">Employability Workshops — Pan-India</div>
+              </div>
+            </div>
+            <span class="exp-toggle-icon">+</span>
+          </button>
+          <div class="exp-body">
+            <div class="exp-body-inner">
+              <ul>
+                <li>Conducted employability and career-readiness workshops for B.Tech students across India.</li>
+                <li>Delivered training on communication skills, interview preparation, group discussions, leadership, and professional etiquette.</li>
+                <li>Helped students improve confidence, presentation abilities, and workplace communication skills.</li>
+                <li>Facilitated interactive sessions designed to enhance professional and personal development.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="section-tag">// 03 — Skills</span>
+        <h2>The toolkit, from breadboard to classroom.</h2>
+      </div>
+      <div class="skill-groups">
+        <div class="skill-card">
+          <h3>Hardware &amp; Electronics</h3>
+          <div class="chip-row">
+            <span class="chip">Arduino Uno</span>
+            <span class="chip">Arduino IDE</span>
+            <span class="chip">Sensor Integration</span>
+            <span class="chip">Actuator Control</span>
+            <span class="chip">Breadboard Prototyping</span>
+            <span class="chip">UART</span>
+            <span class="chip">I2C</span>
+            <span class="chip">SPI</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h3>Software &amp; Concepts</h3>
+          <div class="chip-row">
+            <span class="chip">Embedded C Fundamentals</span>
+            <span class="chip">Basic C/C++</span>
+            <span class="chip">IoT Fundamentals</span>
+            <span class="chip">Tinkercad</span>
+            <span class="chip">Project-Based Learning</span>
+            <span class="chip">Google Workspace</span>
+            <span class="chip">Microsoft Office</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h3>Training &amp; Mentoring</h3>
+          <div class="chip-row">
+            <span class="chip">Curriculum Delivery</span>
+            <span class="chip">Technical Mentoring</span>
+            <span class="chip">Public Speaking</span>
+            <span class="chip">Interview Preparation</span>
+            <span class="chip">Communication Coaching</span>
+            <span class="chip">Leadership Facilitation</span>
+            <span class="chip">Student Assessment</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACHIEVEMENTS -->
+  <section id="achievements">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="section-tag">// 04 — Achievements</span>
+        <h2>A quick signal check.</h2>
+      </div>
+      <div class="ach-strip">
+        <div class="ach-item"><span class="ach-mark">→</span><p>Trained hundreds of students in robotics, STEM education, and technology-focused learning.</p></div>
+        <div class="ach-item"><span class="ach-mark">→</span><p>Conducted technical and soft skills workshops for engineering students across India.</p></div>
+        <div class="ach-item"><span class="ach-mark">→</span><p>Successfully mentored student innovation projects and technical presentations.</p></div>
+        <div class="ach-item"><span class="ach-mark">→</span><p>Delivered high-impact communication and interview skills training programs.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="wrap contact-grid">
+      <div>
+        <span class="section-tag">// 05 — Contact</span>
+        <h2 style="margin-bottom:16px;">Let's build something worth teaching.</h2>
+        <p style="color:var(--text-muted); max-width:48ch;">Open to Faculty Associate, Robotics Trainer, and STEM Educator roles, as well as project-based training engagements.</p>
+        <div class="contact-links">
+          <a class="contact-row" href="mailto:reddts16@gmail.com">
+            <span class="contact-icon">✉</span>
+            <span class="txt"><span class="k">Email</span><br><span class="v">reddts16@gmail.com</span></span>
+          </a>
+          <a class="contact-row" href="tel:+919010614516">
+            <span class="contact-icon">☎</span>
+            <span class="txt"><span class="k">Phone</span><br><span class="v">+91 90106 14516</span></span>
+          </a>
+          <div class="contact-row" style="cursor:default;">
+            <span class="contact-icon">◎</span>
+            <span class="txt"><span class="k">Location</span><br><span class="v">Guntur, Andhra Pradesh, India</span></span>
+          </div>
+        </div>
+        <div class="lang-strip">
+          <span class="lang-chip">English</span>
+          <span class="lang-chip">Telugu</span>
+          <span class="lang-chip">Hindi</span>
+        </div>
+      </div>
+      <div>
+        <div class="skill-card" style="padding:34px;">
+          <h3 style="margin-bottom:12px;">Prefer a quick brief?</h3>
+          <p style="color:var(--text-muted); font-size:0.94rem; margin-bottom:22px;">Use the Hire Me form and I'll get back to you by email — no back-and-forth needed to get started.</p>
+          <button class="btn btn-primary" style="width:100%; justify-content:center;" id="contactHireBtn">Open Hire Me Form</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:12px;">
+    <p>© 2026 Shiva Reddy — Built for robotics education.</p>
+    <p>Guntur, Andhra Pradesh, India</p>
+  </div>
+</footer>
+
+<!-- HIRE ME MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+    <h3>Hire Me</h3>
+    <p class="sub">Tell me a bit about the role or project — I'll reply directly by email.</p>
+    <div class="activation-note">
+      <strong>First-time setup:</strong> the very first submission triggers a one-time confirmation email from FormSubmit to reddts16@gmail.com. Open it and click "Activate Form" — after that, every future submission is delivered automatically with no further steps.
+    </div>
+
+    <form id="hireForm" action="https://formsubmit.co/ajax/reddts16@gmail.com" method="POST">
+      <input type="hidden" name="_subject" value="New Hire Me enquiry — portfolio site">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+
+      <div class="form-field">
+        <label for="fName">Name</label>
+        <input type="text" id="fName" name="Name" required placeholder="Your full name">
+      </div>
+      <div class="form-field">
+        <label for="fCompany">Company / Institution</label>
+        <input type="text" id="fCompany" name="Company" required placeholder="Where you're reaching out from">
+      </div>
+      <div class="form-field">
+        <label for="fEmail">Your Email</label>
+        <input type="email" id="fEmail" name="Reply-To" required placeholder="you@example.com">
+      </div>
+      <div class="form-field">
+        <label for="fDetails">Project Details</label>
+        <textarea id="fDetails" name="Project Details" required placeholder="Role, scope, timeline — whatever's useful."></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary form-submit" id="hireSubmitBtn">Send Enquiry</button>
+      <p class="form-note">Sends directly to reddts16@gmail.com via FormSubmit — no account needed.</p>
+      <div class="form-error" id="formError">
+        <p>Something went wrong sending this automatically — your details weren't lost, just not delivered yet.</p>
+        <a id="mailtoFallback" class="btn btn-ghost" style="width:100%; justify-content:center; margin-top:10px;">Email me directly instead</a>
+      </div>
+    </form>
+    <div class="form-success" id="formSuccess">
+      ✓ Submitted. Thanks — I'll respond shortly by email.
+    </div>
+  </div>
+</div>
+
+<script>
+  // Accordion
+  document.querySelectorAll('.exp-item').forEach(item=>{
+    const head = item.querySelector('.exp-head');
+    const body = item.querySelector('.exp-body');
+    head.addEventListener('click', ()=>{
+      const isOpen = item.getAttribute('data-open') === 'true';
+      // close others
+      document.querySelectorAll('.exp-item').forEach(other=>{
+        if(other !== item){
+          other.setAttribute('data-open','false');
+          other.querySelector('.exp-body').style.maxHeight = null;
+        }
+      });
+      if(isOpen){
+        item.setAttribute('data-open','false');
+        body.style.maxHeight = null;
+      } else {
+        item.setAttribute('data-open','true');
+        body.style.maxHeight = body.scrollHeight + 'px';
+      }
+    });
+  });
+
+  // Mobile nav
+  const menuToggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
+  menuToggle.addEventListener('click', ()=> navLinks.classList.toggle('open'));
+
+  // In-page section navigation — handled entirely in JS (no native hash
+  // navigation) so it always scrolls on the same page instead of ever
+  // being treated as a link to an external site.
+  document.querySelectorAll('[data-scroll-to]').forEach(link=>{
+    link.addEventListener('click', (e)=>{
+      e.preventDefault();
+      const target = document.getElementById(link.getAttribute('data-scroll-to'));
+      if(target){
+        target.scrollIntoView({ behavior:'smooth', block:'start' });
+      }
+      navLinks.classList.remove('open');
+    });
+  });
+
+  // Modal
+  const overlay = document.getElementById('modalOverlay');
+  const openButtons = [document.getElementById('heroHireBtn'), document.getElementById('navHireBtn'), document.getElementById('contactHireBtn')];
+  const closeBtn = document.getElementById('modalClose');
+  function openModal(e){ if(e) e.preventDefault(); overlay.classList.add('active'); document.body.style.overflow='hidden'; }
+  function closeModal(){ overlay.classList.remove('active'); document.body.style.overflow=''; }
+  openButtons.forEach(btn => btn.addEventListener('click', openModal));
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', (e)=>{ if(e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeModal(); });
+
+  // Form submit (AJAX so we can show an inline status instead of navigating away)
+  const hireForm = document.getElementById('hireForm');
+  const formSuccess = document.getElementById('formSuccess');
+  const formError = document.getElementById('formError');
+  const submitBtn = document.getElementById('hireSubmitBtn');
+
+  hireForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    formError.style.display = 'none';
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+
+    const data = new FormData(hireForm);
+    fetch(hireForm.action, { method:'POST', body:data, headers:{ 'Accept':'application/json' } })
+      .then((res)=> res.json().then(json => ({ ok: res.ok, json })))
+      .then(({ ok, json })=>{
+        if(!ok || (json && json.success === 'false')) throw new Error(json && json.message ? json.message : 'Request failed');
+        hireForm.style.display = 'none';
+        formSuccess.style.display = 'block';
+      })
+      .catch((err)=>{
+        console.error('Hire Me form submission failed:', err);
+        // Never auto-redirect on failure — that reads as an unwanted external
+        // navigation. Instead, surface a clear inline message with a manual
+        // fallback the visitor can choose to click themselves.
+        const name = document.getElementById('fName').value;
+        const company = document.getElementById('fCompany').value;
+        const email = document.getElementById('fEmail').value;
+        const details = document.getElementById('fDetails').value;
+        const body = encodeURIComponent(`Name: ${name}\nCompany: ${company}\nEmail: ${email}\n\n${details}`);
+        document.getElementById('mailtoFallback').href = `mailto:reddts16@gmail.com?subject=Hire Me Enquiry&body=${body}`;
+
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Enquiry';
+        formError.style.display = 'block';
+      });
+  });
+</script>
+
+</body>
+</html>
