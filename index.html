@@ -1,1115 +1,529 @@
-  .nav-link:hover{color:var(--text);}<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shiva Reddy — Senior Robotics Trainer &amp; STEM Educator</title>
-<meta name="description" content="Portfolio of Shiva Reddy, Senior Robotics Trainer and STEM Educator specializing in robotics, electronics, IoT and embedded systems education.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg: #0A0E13;
-    --bg-surface: #121821;
-    --bg-surface-2: #1A222D;
-    --border: #232C38;
-    --text: #E7ECF2;
-    --text-muted: #8A96A5;
-    --accent-teal: #4FD8C4;
-    --accent-teal-soft: rgba(79,216,196,0.14);
-    --accent-teal-glow: rgba(79,216,196,0.35);
-    --accent-amber: #FFB454;
-    --amber-soft: rgba(255,180,84,0.14);
-    --radius: 10px;
-    --maxw: 1100px;
-    --ease: cubic-bezier(.22,.61,.36,1);
-  }
-
-  *{box-sizing:border-box; margin:0; padding:0;}
-  html{scroll-behavior:smooth;}
-  body{
-    background:var(--bg);
-    color:var(--text);
-    font-family:'Inter', sans-serif;
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-  }
-  body::before{
-    content:"";
-    position:fixed; inset:0;
-    background-image:
-      linear-gradient(var(--border) 1px, transparent 1px),
-      linear-gradient(90deg, var(--border) 1px, transparent 1px);
-    background-size:64px 64px;
-    opacity:0.18;
-    pointer-events:none;
-    z-index:0;
-    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 0%, transparent 70%);
-  }
-  h1,h2,h3{font-family:'Space Grotesk', sans-serif; font-weight:700; letter-spacing:-0.01em;}
-  a{color:inherit; text-decoration:none;}
-  .mono{font-family:'JetBrains Mono', monospace;}
-  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px; position:relative; z-index:1;}
-  ::selection{background:var(--accent-teal-glow); color:#04120F;}
-
-  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{
-    outline:2px solid var(--accent-teal);
-    outline-offset:3px;
-    border-radius:4px;
-  }
-
-  /* ---------- NAV ---------- */
-  header.nav{
-    position:fixed; top:0; left:0; right:0; z-index:50;
-    backdrop-filter:blur(10px);
-    background:rgba(10,14,19,0.72);
-    border-bottom:1px solid var(--border);
-  }
-  .nav-inner{
-    max-width:var(--maxw); margin:0 auto; padding:16px 28px;
-    display:flex; align-items:center; justify-content:space-between;
-  }
-  .brand{
-    display:flex; align-items:center; gap:10px;
-    font-family:'Space Grotesk'; font-weight:700; font-size:1.05rem; letter-spacing:0.02em;
-  }
-  .brand-node{
-    width:9px; height:9px; border-radius:50%;
-    background:var(--accent-teal);
-    box-shadow:0 0 10px var(--accent-teal-glow);
-    animation:pulse 2.4s infinite ease-in-out;
-  }
-  @keyframes pulse{
-    0%,100%{opacity:1; transform:scale(1);}
-    50%{opacity:0.55; transform:scale(0.82);}
-  }
-  nav.links{display:flex; gap:30px; align-items:center;}
-  .nav-link{
-    font-size:0.86rem; color:var(--text-muted);
-    font-family:'JetBrains Mono'; letter-spacing:0.02em;
-    transition:color .25s var(--ease);
-    position:relative;
-    background:none; border:none; cursor:pointer; padding:0;
-  }
-  .nav-link:hover{color:var(--text);}
-  .nav-link::after{
-    content:""; position:absolute; left:0; bottom:-6px; width:0; height:1px;
-    background:var(--accent-teal); transition:width .3s var(--ease);
-  }
-  .nav-link:hover::after{width:100%;}
-  .nav-cta{
-    padding:9px 18px; border-radius:6px;
-    background:var(--accent-teal); color:#04120F !important;
-    font-weight:600; font-size:0.84rem; font-family:'Inter';
-    border:none; cursor:pointer;
-    transition:transform .2s var(--ease), box-shadow .2s var(--ease);
-  }
-  .nav-cta:hover{transform:translateY(-1px); box-shadow:0 6px 20px var(--accent-teal-glow);}
-  .menu-toggle{display:none; background:none; border:none; color:var(--text); font-size:1.4rem; cursor:pointer;}
-
-  /* ---------- HERO ---------- */
-  .hero{
-    min-height:100vh;
-    display:flex; flex-direction:column; justify-content:center;
-    position:relative;
-    padding:140px 0 80px;
-  }
-  .hero-grid{
-    display:grid; grid-template-columns:1.15fr 0.85fr; gap:40px; align-items:center;
-  }
-  .eyebrow{
-    display:inline-flex; align-items:center; gap:8px;
-    font-family:'JetBrains Mono'; font-size:0.78rem; color:var(--accent-teal);
-    border:1px solid var(--accent-teal-soft); background:var(--accent-teal-soft);
-    padding:6px 12px; border-radius:100px; letter-spacing:0.03em;
-    margin-bottom:22px;
-  }
-  .eyebrow::before{content:"●"; font-size:0.6rem;}
-  .hero h1{
-    font-size:clamp(2.4rem, 5.6vw, 4.4rem);
-    line-height:1.04;
-    margin-bottom:20px;
-  }
-  .hero h1 .accent{color:var(--accent-teal);}
-  .hero p.lede{
-    font-size:1.08rem; color:var(--text-muted); max-width:52ch; margin-bottom:34px;
-  }
-  .hero-ctas{display:flex; gap:14px; flex-wrap:wrap;}
-  .btn{
-    display:inline-flex; align-items:center; gap:9px;
-    padding:13px 24px; border-radius:7px;
-    font-weight:600; font-size:0.92rem; cursor:pointer;
-    border:1px solid transparent;
-    transition:transform .2s var(--ease), box-shadow .2s var(--ease), background .2s var(--ease), border-color .2s var(--ease);
-    font-family:'Inter';
-  }
-  .btn-primary{background:var(--accent-teal); color:#04120F;}
-  .btn-primary:hover{transform:translateY(-2px); box-shadow:0 10px 28px var(--accent-teal-glow);}
-  .btn-ghost{background:transparent; color:var(--text); border-color:var(--border);}
-  .btn-ghost:hover{border-color:var(--accent-teal); color:var(--accent-teal); transform:translateY(-2px);}
-
-  .circuit-wrap{position:relative; height:420px;}
-  .circuit-wrap svg{width:100%; height:100%; overflow:visible;}
-  .trace{
-    fill:none; stroke:var(--accent-teal); stroke-width:1.4;
-    stroke-dasharray:6 6000; stroke-dashoffset:6000;
-    animation:draw 2.6s var(--ease) forwards;
-    opacity:0.85;
-  }
-  .trace.amber{stroke:var(--accent-amber);}
-  @keyframes draw{ to{ stroke-dashoffset:0; } }
-  .node{fill:var(--bg-surface); stroke:var(--accent-teal); stroke-width:1.4;}
-  .node.amber{stroke:var(--accent-amber);}
-  .node-dot{fill:var(--accent-teal); animation:pulse 2.6s infinite ease-in-out;}
-  .node-dot.amber{fill:var(--accent-amber); animation-delay:.6s;}
-  .node-label{
-    font-family:'JetBrains Mono'; font-size:11px; fill:var(--text-muted);
-  }
-
-  /* ---------- SECTION SHARED ---------- */
-  section{padding:110px 0; position:relative; border-top:1px solid var(--border);}
-  .section-head{margin-bottom:52px; max-width:640px;}
-  .section-tag{
-    font-family:'JetBrains Mono'; font-size:0.78rem; color:var(--accent-amber);
-    letter-spacing:0.08em; text-transform:uppercase; display:block; margin-bottom:14px;
-  }
-  .section-head h2{font-size:clamp(1.7rem, 3.4vw, 2.5rem); margin-bottom:14px;}
-  .section-head p{color:var(--text-muted); font-size:1.02rem; max-width:56ch;}
-
-  /* ---------- ABOUT ---------- */
-  .about-grid{display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:start;}
-  .about-text p{color:var(--text-muted); margin-bottom:18px; font-size:1rem;}
-  .about-text strong{color:var(--text); font-weight:600;}
-  .stat-strip{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
-  .stat-card{
-    background:var(--bg-surface); border:1px solid var(--border); border-radius:var(--radius);
-    padding:22px 20px;
-  }
-  .stat-card .num{font-family:'Space Grotesk'; font-size:1.9rem; color:var(--accent-teal); font-weight:700;}
-  .stat-card .label{font-size:0.84rem; color:var(--text-muted); margin-top:4px;}
-
-  /* ---------- EXPERIENCE (accordion) ---------- */
-  .exp-list{display:flex; flex-direction:column; gap:14px;}
-  .exp-item{
-    background:var(--bg-surface); border:1px solid var(--border); border-radius:var(--radius);
-    overflow:hidden; transition:border-color .25s var(--ease);
-  }
-  .exp-item[data-open="true"]{border-color:var(--accent-teal);}
-  .exp-head{
-    width:100%; display:flex; align-items:center; justify-content:space-between; gap:20px;
-    padding:22px 24px; background:none; border:none; cursor:pointer; text-align:left; color:var(--text);
-  }
-  .exp-head-left{display:flex; align-items:center; gap:16px;}
-  .led{
-    width:11px; height:11px; border-radius:50%; flex-shrink:0;
-    background:var(--bg-surface-2); border:1px solid var(--border);
-    transition:background .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease);
-  }
-  .exp-item[data-open="true"] .led{
-    background:var(--accent-amber); box-shadow:0 0 10px var(--amber-soft); border-color:var(--accent-amber);
-  }
-  .exp-role{font-family:'Space Grotesk'; font-weight:600; font-size:1.08rem;}
-  .exp-org{font-family:'JetBrains Mono'; font-size:0.82rem; color:var(--text-muted); margin-top:3px;}
-  .exp-toggle-icon{
-    width:26px; height:26px; border-radius:50%; border:1px solid var(--border);
-    display:flex; align-items:center; justify-content:center; flex-shrink:0;
-    transition:transform .3s var(--ease), border-color .25s var(--ease);
-    color:var(--text-muted);
-  }
-  .exp-item[data-open="true"] .exp-toggle-icon{transform:rotate(45deg); border-color:var(--accent-teal); color:var(--accent-teal);}
-  .exp-body{
-    max-height:0; overflow:hidden; transition:max-height .45s var(--ease);
-  }
-  .exp-body-inner{padding:0 24px 26px 60px;}
-  .exp-body-inner ul{list-style:none; display:flex; flex-direction:column; gap:12px;}
-  .exp-body-inner li{
-    position:relative; padding-left:20px; color:var(--text-muted); font-size:0.96rem;
-  }
-  .exp-body-inner li::before{
-    content:""; position:absolute; left:0; top:9px; width:6px; height:1.4px; background:var(--accent-teal);
-  }
-
-  /* ---------- SKILLS ---------- */
-  .skill-groups{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
-  .skill-card{
-    background:var(--bg-surface); border:1px solid var(--border); border-radius:var(--radius); padding:26px;
-  }
-  .skill-card h3{
-    font-size:0.78rem; font-family:'JetBrains Mono'; color:var(--accent-teal);
-    text-transform:uppercase; letter-spacing:0.06em; margin-bottom:18px; font-weight:500;
-  }
-  .chip-row{display:flex; flex-wrap:wrap; gap:9px;}
-  .chip{
-    font-family:'JetBrains Mono'; font-size:0.8rem; color:var(--text);
-    border:1px solid var(--border); background:var(--bg-surface-2);
-    padding:7px 12px; border-radius:6px;
-    transition:border-color .2s var(--ease), color .2s var(--ease);
-  }
-  .chip:hover{border-color:var(--accent-teal); color:var(--accent-teal);}
-
-  /* ---------- ACHIEVEMENTS ---------- */
-  .ach-strip{display:grid; grid-template-columns:repeat(2,1fr); gap:18px;}
-  .ach-item{
-    display:flex; gap:16px; padding:22px; background:var(--bg-surface);
-    border:1px solid var(--border); border-radius:var(--radius);
-  }
-  .ach-mark{
-    font-family:'Space Grotesk'; font-weight:700; color:var(--accent-amber); font-size:1.1rem; flex-shrink:0;
-  }
-  .ach-item p{color:var(--text-muted); font-size:0.94rem;}
-
-  /* ---------- CONTACT ---------- */
-  .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center;}
-  .contact-links{display:flex; flex-direction:column; gap:18px; margin-top:28px;}
-  .contact-row{
-    display:flex; align-items:center; gap:14px; padding:16px 18px;
-    background:var(--bg-surface); border:1px solid var(--border); border-radius:var(--radius);
-    transition:border-color .2s var(--ease), transform .2s var(--ease);
-  }
-  .contact-row:hover{border-color:var(--accent-teal); transform:translateX(4px);}
-  .contact-icon{
-    width:36px; height:36px; border-radius:8px; background:var(--accent-teal-soft);
-    display:flex; align-items:center; justify-content:center; color:var(--accent-teal); flex-shrink:0;
-  }
-  .contact-row .txt .k{font-size:0.72rem; color:var(--text-muted); font-family:'JetBrains Mono'; text-transform:uppercase; letter-spacing:0.04em;}
-  .contact-row .txt .v{font-size:0.98rem; font-weight:500;}
-  .lang-strip{display:flex; gap:10px; margin-top:26px;}
-  .lang-chip{
-    font-family:'JetBrains Mono'; font-size:0.78rem; color:var(--text-muted);
-    border:1px solid var(--border); padding:6px 12px; border-radius:100px;
-  }
-
-  /* ---------- MODAL ---------- */
-  .modal-overlay{
-    position:fixed; inset:0; background:rgba(6,9,12,0.7); backdrop-filter:blur(6px);
-    display:flex; align-items:center; justify-content:center; z-index:100;
-    opacity:0; pointer-events:none; transition:opacity .3s var(--ease); padding:20px;
-  }
-  .modal-overlay.active{opacity:1; pointer-events:auto;}
-  .modal{
-    background:var(--bg-surface); border:1px solid var(--border); border-radius:14px;
-    width:100%; max-width:460px; padding:34px; position:relative;
-    transform:translateY(16px) scale(0.98); opacity:0; transition:all .35s var(--ease);
-    max-height:88vh; overflow-y:auto;
-  }
-  .modal-overlay.active .modal{transform:translateY(0) scale(1); opacity:1;}
-  .modal-close{
-    position:absolute; top:20px; right:20px; background:none; border:none; color:var(--text-muted);
-    font-size:1.3rem; cursor:pointer; line-height:1;
-  }
-  .modal-close:hover{color:var(--text);}
-  .modal h3{font-size:1.4rem; margin-bottom:6px;}
-  .modal p.sub{color:var(--text-muted); font-size:0.9rem; margin-bottom:16px;}
-  .activation-note{
-    font-size:0.82rem; color:var(--text-muted); background:var(--bg-surface-2);
-    border:1px solid var(--border); border-radius:8px; padding:12px 14px; margin-bottom:22px;
-    line-height:1.5;
-  }
-  .activation-note strong{color:var(--accent-teal);}
-  .form-field{margin-bottom:16px;}
-  .form-field label{
-    display:block; font-family:'JetBrains Mono'; font-size:0.76rem; color:var(--text-muted);
-    text-transform:uppercase; letter-spacing:0.04em; margin-bottom:8px;
-  }
-  .form-field input, .form-field textarea{
-    width:100%; background:var(--bg-surface-2); border:1px solid var(--border); border-radius:7px;
-    padding:12px 14px; color:var(--text); font-family:'Inter'; font-size:0.94rem;
-    transition:border-color .2s var(--ease);
-  }
-  .form-field input:focus, .form-field textarea:focus{border-color:var(--accent-teal); outline:none;}
-  .form-field textarea{resize:vertical; min-height:90px;}
-  .form-submit{width:100%; justify-content:center; margin-top:6px;}
-  .form-note{font-size:0.76rem; color:var(--text-muted); margin-top:14px; text-align:center;}
-  .form-success{
-    display:none; text-align:center; padding:20px 0; color:var(--accent-teal);
-    font-family:'JetBrains Mono'; font-size:0.9rem;
-  }
-  .form-error{
-    display:none; margin-top:16px; padding:16px; border-radius:8px;
-    background:var(--amber-soft); border:1px solid rgba(255,180,84,0.35);
-  }
-  .form-error p{color:var(--text); font-size:0.86rem;}
-
-  /* ---------- FOOTER ---------- */
-  footer{
-    padding:36px 0; border-top:1px solid var(--border);
-    display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;
-  }
-  footer p{color:var(--text-muted); font-size:0.82rem; font-family:'JetBrains Mono';}
-
-  /* ---------- RESPONSIVE ---------- */
-  @media (max-width:860px){
-    nav.links{
-      position:fixed; top:64px; left:0; right:0; background:var(--bg-surface);
-      flex-direction:column; align-items:flex-start; padding:24px 28px; gap:20px;
-      border-bottom:1px solid var(--border);
-      transform:translateY(-130%); transition:transform .35s var(--ease); z-index:49;
-    }
-    nav.links.open{transform:translateY(0);}
-    .menu-toggle{display:block;}
-    .hero-grid{grid-template-columns:1fr;}
-    .circuit-wrap{height:280px; order:-1;}
-    .about-grid, .contact-grid{grid-template-columns:1fr; gap:36px;}
-    .skill-groups{grid-template-columns:1fr;}
-    .ach-strip{grid-template-columns:1fr;}
-    .exp-body-inner{padding-left:24px;}
-  }
-  @media (prefers-reduced-motion: reduce){
-    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
-    .trace{stroke-dashoffset:0;}
-  }
-</style>
-</head>
-<body>
-
-<header class="nav">
-  <div class="nav-inner">
-    <a href="#top" class="brand"><span class="brand-node"></span>SHIVA REDDY</a>
-    <nav class="links" id="navLinks">
-      <button type="button" class="nav-link" data-scroll-to="about">About</button>
-      <button type="button" class="nav-link" data-scroll-to="experience">Experience</button>
-      <button type="button" class="nav-link" data-scroll-to="skills">Skills</button>
-      <button type="button" class="nav-link" data-scroll-to="achievements">Achievements</button>
-      <button type="button" class="nav-link" data-scroll-to="contact">Contact</button>
-      <button type="button" class="nav-cta" id="navHireBtn">Hire Me</button>
-    </nav>
-    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
-  </div>
-</header>
-
-<main id="top">
-
-  <!-- HERO -->
-  <section class="hero" style="border-top:none; padding-top:150px;">
-    <div class="wrap hero-grid">
-      <div>
-        <span class="eyebrow">AVAILABLE FOR ROBOTICS &amp; STEM INSTRUCTOR ROLES</span>
-        <h1>Teaching machines to think, and students to <span class="accent">build</span>.</h1>
-        <p class="lede">Senior Robotics Trainer and STEM Educator with hands-on experience across electronics, IoT, embedded systems, and technical mentoring — turning circuits and code into confidence for students across India.</p>
-        <div class="hero-ctas">
-          <button class="btn btn-primary" id="heroHireBtn">Hire Me</button>
-          <a class="btn btn-ghost" href="Shiva_Reddy_Resume.pdf" download>Download Resume ↓</a>
-        </div>
-      </div>
-      <div class="circuit-wrap" aria-hidden="true">
-        <svg viewBox="0 0 380 420">
-          <path class="trace" d="M40 40 H180 V120 H320" />
-          <path class="trace amber" d="M40 200 H140 V320 H300 V380" />
-          <path class="trace" d="M320 120 V220 H220 V320" style="animation-delay:.3s" />
-          <path class="trace amber" d="M40 40 V140 H100 V200" style="animation-delay:.5s" />
-
-          <circle class="node" cx="40" cy="40" r="16"></circle>
-          <circle class="node-dot" cx="40" cy="40" r="3.5"></circle>
-          <text class="node-label" x="60" y="44">Arduino</text>
-
-          <circle class="node" cx="320" cy="120" r="16"></circle>
-          <circle class="node-dot" cx="320" cy="120" r="3.5"></circle>
-          <text class="node-label" x="243" y="104">Embedded C</text>
-
-          <circle class="node amber" cx="40" cy="200" r="16"></circle>
-          <circle class="node-dot amber" cx="40" cy="200" r="3.5"></circle>
-          <text class="node-label" x="60" y="204">IoT</text>
-
-          <circle class="node amber" cx="300" cy="380" r="16"></circle>
-          <circle class="node-dot amber" cx="300" cy="380" r="3.5"></circle>
-          <text class="node-label" x="220" y="404">Mentoring</text>
-
-          <circle class="node" cx="220" cy="320" r="16"></circle>
-          <circle class="node-dot" cx="220" cy="320" r="3.5"></circle>
-          <text class="node-label" x="240" y="324">Sensors</text>
-
-          <circle class="node" cx="100" cy="200" r="16"></circle>
-          <circle class="node-dot" cx="100" cy="200" r="3.5"></circle>
-          <text class="node-label" x="60" y="185">Curriculum</text>
-        </svg>
-      </div>
-    </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="wrap about-grid">
-      <div>
-        <span class="section-tag">// 01 — About</span>
-        <h2 style="margin-bottom:24px;">Bridging the gap between theory and the workbench.</h2>
-        <div class="about-text">
-          <p>I'm a <strong>Senior Robotics Trainer, STEM Educator, and Soft Skills Trainer</strong> with a background in robotics education, electronics, and IoT fundamentals. My work centers on hands-on, project-based learning — helping students move from understan
-  .nav-link::after{
-    content:""; position:absolute; left:0; bottom:-6px; width:0; height:1px;
-    background:var(--accent-teal); transition:width .3s var(--ease);
-  }
-  .nav-link:hover::after{width:100%;}
-  .nav-cta{
-    padding:9px 18px; border-radius:6px;
-    background:var(--accent-teal); color:#04120F !important;
-    font-weight:600; font-size:0.84rem; font-family:'Inter';
-    border:none; cursor:pointer;
-    transition:transform .2s var(--ease), box-shadow .2s var(--ease);
-  }
-  .nav-cta:hover{transform:translateY(-1px); box-shadow:0 6px 20px var(--accent-teal-glow);}
-  .menu-toggle{display:none; background:none; border:none; color:var(--text); font-size:1.4rem; cursor:pointer;}
-
-  /* ---------- HERO ---------- */
-  .hero{
-    min-height:100vh;
-    display:flex; flex-direction:column; justify-content:center;
-    position:relative;
-    padding:140px 0 80px;
-  }
-  .hero-grid{
-    display:grid; grid-template-columns:1.15fr 0.85fr; gap:40px; align-items:center;
-  }
-  .eyebrow{
-    display:inline-flex; align-items:center; gap:8px;
-    font-family:'JetBrains Mono'; font-size:0.78rem; color:var(--accent-teal);
-    border:1px solid var(--accent-teal-soft); background:var(--accent-teal-soft);
-    padding:6px 12px; border-radius:100px; letter-spacing:0.03em;
-    margin-bottom:22px;
-  }
-  .eyebrow::before{content:"●"; font-size:0.6rem;}
-  .hero h1{
-    font-size:clamp(2.4rem, 5.6vw, 4.4rem);
-    line-height:1.04;
-    margin-bottom:20px;
-  }
-  .hero h1 .accent{color:var(--accent-teal);}
-  .hero p.lede{
-    font-size:1.08rem; color:var(--text-muted); max-width:52ch; margin-bottom:34px;
-  }
-  .hero-ctas{display:flex; gap:14px; flex-wrap:wrap;}
-  .btn{
-    display:inline-flex; align-items:center; gap:9px;
-    padding:13px 24px; border-radius:7px;
-    font-weight:600; font-size:0.92rem; cursor:pointer;
-    border:1px solid transparent;
-    transition:transform .2s var(--ease), box-shadow .2s var(--ease), background .2s var(--ease), border-color .2s var(--ease);
-    font-family:'Inter';
-  }
-  .btn-primary{background:var(--accent-teal); color:#04120F;}
-  .btn-primary:hover{transform:translateY(-2px); box-shadow:0 10px 28px var(--accent-teal-glow);}
-  .btn-ghost{background:transparent; color:var(--text); border-color:var(--border);}
-  .btn-ghost:hover{border-color:var(--accent-teal); color:var(--accent-teal); transform:translateY(-2px);}
-
-  .circuit-wrap{position:relative; height:420px;}
-  .circuit-wrap svg{width:100%; height:100%; overflow:visible;}
-  .trace{
-    fill:none; stroke:var(--accent-teal); stroke-width:1.4;
-    stroke-dasharray:6 6000; stroke-dashoffset:6000;
-    animation:draw 2.6s var(--ease) forwards;
-    opacity:0.85;
-  }
-  .trace.amber{stroke:var(--accent-amber);}
-  @keyframes draw{ to{ stroke-dashoffset:0; } }
-  .node{fill:var(--bg-surface); stroke:var(--accent-teal); stroke-width:1.4;}
-  .node.amber{stroke:var(--accent-amber);}
-  .node-dot{fill:var(--accent-teal); animation:pulse 2.6s infinite ease-in-out;}
-  .node-dot.amber{fill:var(--accent-amber); animation-delay:.6s;}
-  .node-label{
-    font-family:'JetBrains Mono'; font-size:11px; fill:var(--text-muted);
-  }
-
-  /* ---------- SECTION SHARED ---------- */
-  section{padding:110px 0; position:relative; border-top:1px solid var(--border);}
-  .section-head{margin-bottom:52px; max-width:640px;}
-  .section-tag{
-    font-family:'JetBrains Mono'; font-size:0.78rem; color:var(--accent-amber);
-    letter-spacing:0.08em; text-transform:uppercase; display:block; margin-bottom:14px;
-  }
-  .section-head h2{font-size:clamp(1.7rem, 3.4vw, 2.5rem); margin-bottom:14px;}
-  .section-head p{color:var(--text-muted); font-size:1.02rem; max-width:56ch;}
-
-  /* ---------- ABOUT ---------- */
-  .about-grid{display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:start;}
-  .about-text p{color:var(--text-muted); margin-bottom:18px; font-size:1rem;}
-  .about-text strong{color:var(--text); font-weight:600;}
-  .stat-strip{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
-  .stat-card{
-    background:var(--bg-surface); border:1px solid var(--border); border-radius:var(--radius);
-    padding:22px 20px;
-  }
-  .stat-card .num{font-family:'Space Grotesk'; font-size:1.9rem; color:var(--accent-teal); font-weight:700;}
-  .stat-card .label{font-size:0.84rem; color:var(--text-muted); margin-top:4px;}
-
-  /* ---------- EXPERIENCE (accordion) ---------- */
-  .exp-list{display:flex; flex-direction:column; gap:14px;}
-  .exp-item{
-    background:var(--bg-surface); border:1px solid var(--border); border-radius:var(--radius);
-    overflow:hidden; transition:border-color .25s var(--ease);
-  }
-  .exp-item[data-open="true"]{border-color:var(--accent-teal);}
-  .exp-head{
-    width:100%; display:flex; align-items:center; justify-content:space-between; gap:20px;
-    padding:22px 24px; background:none; border:none; cursor:pointer; text-align:left; color:var(--text);
-  }
-  .exp-head-left{display:flex; align-items:center; gap:16px;}
-  .led{
-    width:11px; height:11px; border-radius:50%; flex-shrink:0;
-    background:var(--bg-surface-2); border:1px solid var(--border);
-    transition:background .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease);
-  }
-  .exp-item[data-open="true"] .led{
-    background:var(--accent-amber); box-shadow:0 0 10px var(--amber-soft); border-color:var(--accent-amber);
-  }
-  .exp-role{font-family:'Space Grotesk'; font-weight:600; font-size:1.08rem;}
-  .exp-org{font-family:'JetBrains Mono'; font-size:0.82rem; color:var(--text-muted); margin-top:3px;}
-  .exp-toggle-icon{
-    width:26px; height:26px; border-radius:50%; border:1px solid var(--border);
-    display:flex; align-items:center; justify-content:center; flex-shrink:0;
-    transition:transform .3s var(--ease), border-color .25s var(--ease);
-    color:var(--text-muted);
-  }
-  .exp-item[data-open="true"] .exp-toggle-icon{transform:rotate(45deg); border-color:var(--accent-teal); color:var(--accent-teal);}
-  .exp-body{
-    max-height:0; overflow:hidden; transition:max-height .45s var(--ease);
-  }
-  .exp-body-inner{padding:0 24px 26px 60px;}
-  .exp-body-inner ul{list-style:none; display:flex; flex-direction:column; gap:12px;}
-  .exp-body-inner li{
-    position:relative; padding-left:20px; color:var(--text-muted); font-size:0.96rem;
-  }
-  .exp-body-inner li::before{
-    content:""; position:absolute; left:0; top:9px; width:6px; height:1.4px; background:var(--accent-teal);
-  }
-
-  /* ---------- SKILLS ---------- */
-  .skill-groups{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
-  .skill-card{
-    background:var(--bg-surface); border:1px solid var(--border); border-radius:var(--radius); padding:26px;
-  }
-  .skill-card h3{
-    font-size:0.78rem; font-family:'JetBrains Mono'; color:var(--accent-teal);
-    text-transform:uppercase; letter-spacing:0.06em; margin-bottom:18px; font-weight:500;
-  }
-  .chip-row{display:flex; flex-wrap:wrap; gap:9px;}
-  .chip{
-    font-family:'JetBrains Mono'; font-size:0.8rem; color:var(--text);
-    border:1px solid var(--border); background:var(--bg-surface-2);
-    padding:7px 12px; border-radius:6px;
-    transition:border-color .2s var(--ease), color .2s var(--ease);
-  }
-  .chip:hover{border-color:var(--accent-teal); color:var(--accent-teal);}
-
-  /* ---------- ACHIEVEMENTS ---------- */
-  .ach-strip{display:grid; grid-template-columns:repeat(2,1fr); gap:18px;}
-  .ach-item{
-    display:flex; gap:16px; padding:22px; background:var(--bg-surface);
-    border:1px solid var(--border); border-radius:var(--radius);
-  }
-  .ach-mark{
-    font-family:'Space Grotesk'; font-weight:700; color:var(--accent-amber); font-size:1.1rem; flex-shrink:0;
-  }
-  .ach-item p{color:var(--text-muted); font-size:0.94rem;}
-
-  /* ---------- CONTACT ---------- */
-  .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center;}
-  .contact-links{display:flex; flex-direction:column; gap:18px; margin-top:28px;}
-  .contact-row{
-    display:flex; align-items:center; gap:14px; padding:16px 18px;
-    background:var(--bg-surface); border:1px solid var(--border); border-radius:var(--radius);
-    transition:border-color .2s var(--ease), transform .2s var(--ease);
-  }
-  .contact-row:hover{border-color:var(--accent-teal); transform:translateX(4px);}
-  .contact-icon{
-    width:36px; height:36px; border-radius:8px; background:var(--accent-teal-soft);
-    display:flex; align-items:center; justify-content:center; color:var(--accent-teal); flex-shrink:0;
-  }
-  .contact-row .txt .k{font-size:0.72rem; color:var(--text-muted); font-family:'JetBrains Mono'; text-transform:uppercase; letter-spacing:0.04em;}
-  .contact-row .txt .v{font-size:0.98rem; font-weight:500;}
-  .lang-strip{display:flex; gap:10px; margin-top:26px;}
-  .lang-chip{
-    font-family:'JetBrains Mono'; font-size:0.78rem; color:var(--text-muted);
-    border:1px solid var(--border); padding:6px 12px; border-radius:100px;
-  }
-
-  /* ---------- MODAL ---------- */
-  .modal-overlay{
-    position:fixed; inset:0; background:rgba(6,9,12,0.7); backdrop-filter:blur(6px);
-    display:flex; align-items:center; justify-content:center; z-index:100;
-    opacity:0; pointer-events:none; transition:opacity .3s var(--ease); padding:20px;
-  }
-  .modal-overlay.active{opacity:1; pointer-events:auto;}
-  .modal{
-    background:var(--bg-surface); border:1px solid var(--border); border-radius:14px;
-    width:100%; max-width:460px; padding:34px; position:relative;
-    transform:translateY(16px) scale(0.98); opacity:0; transition:all .35s var(--ease);
-    max-height:88vh; overflow-y:auto;
-  }
-  .modal-overlay.active .modal{transform:translateY(0) scale(1); opacity:1;}
-  .modal-close{
-    position:absolute; top:20px; right:20px; background:none; border:none; color:var(--text-muted);
-    font-size:1.3rem; cursor:pointer; line-height:1;
-  }
-  .modal-close:hover{color:var(--text);}
-  .modal h3{font-size:1.4rem; margin-bottom:6px;}
-  .modal p.sub{color:var(--text-muted); font-size:0.9rem; margin-bottom:16px;}
-  .activation-note{
-    font-size:0.82rem; color:var(--text-muted); background:var(--bg-surface-2);
-    border:1px solid var(--border); border-radius:8px; padding:12px 14px; margin-bottom:22px;
-    line-height:1.5;
-  }
-  .activation-note strong{color:var(--accent-teal);}
-  .form-field{margin-bottom:16px;}
-  .form-field label{
-    display:block; font-family:'JetBrains Mono'; font-size:0.76rem; color:var(--text-muted);
-    text-transform:uppercase; letter-spacing:0.04em; margin-bottom:8px;
-  }
-  .form-field input, .form-field textarea{
-    width:100%; background:var(--bg-surface-2); border:1px solid var(--border); border-radius:7px;
-    padding:12px 14px; color:var(--text); font-family:'Inter'; font-size:0.94rem;
-    transition:border-color .2s var(--ease);
-  }
-  .form-field input:focus, .form-field textarea:focus{border-color:var(--accent-teal); outline:none;}
-  .form-field textarea{resize:vertical; min-height:90px;}
-  .form-submit{width:100%; justify-content:center; margin-top:6px;}
-  .form-note{font-size:0.76rem; color:var(--text-muted); margin-top:14px; text-align:center;}
-  .form-success{
-    display:none; text-align:center; padding:20px 0; color:var(--accent-teal);
-    font-family:'JetBrains Mono'; font-size:0.9rem;
-  }
-  .form-error{
-    display:none; margin-top:16px; padding:16px; border-radius:8px;
-    background:var(--amber-soft); border:1px solid rgba(255,180,84,0.35);
-  }
-  .form-error p{color:var(--text); font-size:0.86rem;}
-
-  /* ---------- FOOTER ---------- */
-  footer{
-    padding:36px 0; border-top:1px solid var(--border);
-    display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;
-  }
-  footer p{color:var(--text-muted); font-size:0.82rem; font-family:'JetBrains Mono';}
-
-  /* ---------- RESPONSIVE ---------- */
-  @media (max-width:860px){
-    nav.links{
-      position:fixed; top:64px; left:0; right:0; background:var(--bg-surface);
-      flex-direction:column; align-items:flex-start; padding:24px 28px; gap:20px;
-      border-bottom:1px solid var(--border);
-      transform:translateY(-130%); transition:transform .35s var(--ease); z-index:49;
-    }
-    nav.links.open{transform:translateY(0);}
-    .menu-toggle{display:block;}
-    .hero-grid{grid-template-columns:1fr;}
-    .circuit-wrap{height:280px; order:-1;}
-    .about-grid, .contact-grid{grid-template-columns:1fr; gap:36px;}
-    .skill-groups{grid-template-columns:1fr;}
-    .ach-strip{grid-template-columns:1fr;}
-    .exp-body-inner{padding-left:24px;}
-  }
-  @media (prefers-reduced-motion: reduce){
-    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
-    .trace{stroke-dashoffset:0;}
-  }
-</style>
-</head>
-<body>
-
-<header class="nav">
-  <div class="nav-inner">
-    <a href="#top" class="brand"><span class="brand-node"></span>SHIVA REDDY</a>
-    <nav class="links" id="navLinks">
-      <button type="button" class="nav-link" data-scroll-to="about">About</button>
-      <button type="button" class="nav-link" data-scroll-to="experience">Experience</button>
-      <button type="button" class="nav-link" data-scroll-to="skills">Skills</button>
-      <button type="button" class="nav-link" data-scroll-to="achievements">Achievements</button>
-      <button type="button" class="nav-link" data-scroll-to="contact">Contact</button>
-      <button type="button" class="nav-cta" id="navHireBtn">Hire Me</button>
-    </nav>
-    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
-  </div>
-</header>
-
-<main id="top">
-
-  <!-- HERO -->
-  <section class="hero" style="border-top:none; padding-top:150px;">
-    <div class="wrap hero-grid">
-      <div>
-        <span class="eyebrow">AVAILABLE FOR ROBOTICS &amp; STEM INSTRUCTOR ROLES</span>
-        <h1>Teaching machines to think, and students to <span class="accent">build</span>.</h1>
-        <p class="lede">Senior Robotics Trainer and STEM Educator with hands-on experience across electronics, IoT, embedded systems, and technical mentoring — turning circuits and code into confidence for students across India.</p>
-        <div class="hero-ctas">
-          <button class="btn btn-primary" id="heroHireBtn">Hire Me</button>
-          <a class="btn btn-ghost" href="Shiva_Reddy_Resume.pdf" download>Download Resume ↓</a>
-        </div>
-      </div>
-      <div class="circuit-wrap" aria-hidden="true">
-        <svg viewBox="0 0 380 420">
-          <path class="trace" d="M40 40 H180 V120 H320" />
-          <path class="trace amber" d="M40 200 H140 V320 H300 V380" />
-          <path class="trace" d="M320 120 V220 H220 V320" style="animation-delay:.3s" />
-          <path class="trace amber" d="M40 40 V140 H100 V200" style="animation-delay:.5s" />
-
-          <circle class="node" cx="40" cy="40" r="16"></circle>
-          <circle class="node-dot" cx="40" cy="40" r="3.5"></circle>
-          <text class="node-label" x="60" y="44">Arduino</text>
-
-          <circle class="node" cx="320" cy="120" r="16"></circle>
-          <circle class="node-dot" cx="320" cy="120" r="3.5"></circle>
-          <text class="node-label" x="243" y="104">Embedded C</text>
-
-          <circle class="node amber" cx="40" cy="200" r="16"></circle>
-          <circle class="node-dot amber" cx="40" cy="200" r="3.5"></circle>
-          <text class="node-label" x="60" y="204">IoT</text>
-
-          <circle class="node amber" cx="300" cy="380" r="16"></circle>
-          <circle class="node-dot amber" cx="300" cy="380" r="3.5"></circle>
-          <text class="node-label" x="220" y="404">Mentoring</text>
-
-          <circle class="node" cx="220" cy="320" r="16"></circle>
-          <circle class="node-dot" cx="220" cy="320" r="3.5"></circle>
-          <text class="node-label" x="240" y="324">Sensors</text>
-
-          <circle class="node" cx="100" cy="200" r="16"></circle>
-          <circle class="node-dot" cx="100" cy="200" r="3.5"></circle>
-          <text class="node-label" x="60" y="185">Curriculum</text>
-        </svg>
-      </div>
-    </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="wrap about-grid">
-      <div>
-        <span class="section-tag">// 01 — About</span>
-        <h2 style="margin-bottom:24px;">Bridging the gap between theory and the workbench.</h2>
-        <div class="about-text">
-          <p>I'm a <strong>Senior Robotics Trainer, STEM Educator, and Soft Skills Trainer</strong> with a background in robotics education, electronics, and IoT fundamentals. My work centers on hands-on, project-based learning — helping students move from understanding a circuit diagram to actually building, debugging, and presenting the thing they made.</p>
-          <p>Alongside technical training, I run <strong>employability and communication workshops</strong> for engineering students across India, covering interview preparation, public speaking, and professional etiquette — because I've seen that great engineers still need to be able to explain their work clearly.</p>
-          <p>I'm currently deepening my specialization in <strong>Robotics and Embedded Systems</strong>, with plans to pursue an M.Tech in the field.</p>
-        </div>
-      </div>
-      <div class="stat-strip">
-        <div class="stat-card"><div class="num">B.Tech</div><div class="label">JNTU Kakinada, 2022</div></div>
-        <div class="stat-card"><div class="num">TESOL</div><div class="label">Certified — PlanetSpark</div></div>
-        <div class="stat-card"><div class="num">3</div><div class="label">Training domains: Robotics, STEM &amp; Soft Skills</div></div>
-        <div class="stat-card"><div class="num">3</div><div class="label">Languages: English, Telugu, Hindi</div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- EXPERIENCE -->
-  <section id="experience">
-    <div class="wrap">
-      <div class="section-head">
-        <span class="section-tag">// 02 — Experience</span>
-        <h2>Where I've trained, mentored, and built.</h2>
-        <p>Click any role to expand the details. Each position reflects hands-on delivery, not just design of curriculum.</p>
-      </div>
-
-      <div class="exp-list" id="expList">
-
-        <div class="exp-item" data-open="false">
-          <button class="exp-head">
-            <div class="exp-head-left">
-              <span class="led"></span>
-              <div>
-                <div class="exp-role">Senior Robotics Trainer</div>
-                <div class="exp-org">Care Cubs</div>
-              </div>
-            </div>
-            <span class="exp-toggle-icon">+</span>
-          </button>
-          <div class="exp-body">
-            <div class="exp-body-inner">
-              <ul>
-                <li>Deliver robotics, electronics, STEM, and IoT-focused training programs for students.</li>
-                <li>Conduct hands-on practical sessions involving sensors, actuators, microcontrollers, and automation projects.</li>
-                <li>Mentor students in innovation projects, technical competitions, and problem-solving activities.</li>
-                <li>Design engaging learning experiences that bridge theoretical concepts with practical implementation.</li>
-                <li>Support schools and educational institutions in implementing technology-driven learning programs.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div class="exp-item" data-open="false">
-          <button class="exp-head">
-            <div class="exp-head-left">
-              <span class="led"></span>
-              <div>
-                <div class="exp-role">Senior Robotics Trainer</div>
-                <div class="exp-org">WizKlub</div>
-              </div>
-            </div>
-            <span class="exp-toggle-icon">+</span>
-          </button>
-          <div class="exp-body">
-            <div class="exp-body-inner">
-              <ul>
-                <li>Conducted robotics, coding, and STEM education sessions for students across various age groups.</li>
-                <li>Guided learners in project development using electronics and programming concepts.</li>
-                <li>Delivered experiential learning modules focused on creativity, innovation, and design thinking.</li>
-                <li>Assessed student performance and provided individualized mentoring support.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div class="exp-item" data-open="false">
-          <button class="exp-head">
-            <div class="exp-head-left">
-              <span class="led"></span>
-              <div>
-                <div class="exp-role">Soft Skills, Communication &amp; Interview Skills Trainer</div>
-                <div class="exp-org">Employability Workshops — Pan-India</div>
-              </div>
-            </div>
-            <span class="exp-toggle-icon">+</span>
-          </button>
-          <div class="exp-body">
-            <div class="exp-body-inner">
-              <ul>
-                <li>Conducted employability and career-readiness workshops for B.Tech students across India.</li>
-                <li>Delivered training on communication skills, interview preparation, group discussions, leadership, and professional etiquette.</li>
-                <li>Helped students improve confidence, presentation abilities, and workplace communication skills.</li>
-                <li>Facilitated interactive sessions designed to enhance professional and personal development.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- SKILLS -->
-  <section id="skills">
-    <div class="wrap">
-      <div class="section-head">
-        <span class="section-tag">// 03 — Skills</span>
-        <h2>The toolkit, from breadboard to classroom.</h2>
-      </div>
-      <div class="skill-groups">
-        <div class="skill-card">
-          <h3>Hardware &amp; Electronics</h3>
-          <div class="chip-row">
-            <span class="chip">Arduino Uno</span>
-            <span class="chip">Arduino IDE</span>
-            <span class="chip">Sensor Integration</span>
-            <span class="chip">Actuator Control</span>
-            <span class="chip">Breadboard Prototyping</span>
-            <span class="chip">UART</span>
-            <span class="chip">I2C</span>
-            <span class="chip">SPI</span>
-          </div>
-        </div>
-        <div class="skill-card">
-          <h3>Software &amp; Concepts</h3>
-          <div class="chip-row">
-            <span class="chip">Embedded C Fundamentals</span>
-            <span class="chip">Basic C/C++</span>
-            <span class="chip">IoT Fundamentals</span>
-            <span class="chip">Tinkercad</span>
-            <span class="chip">Project-Based Learning</span>
-            <span class="chip">Google Workspace</span>
-            <span class="chip">Microsoft Office</span>
-          </div>
-        </div>
-        <div class="skill-card">
-          <h3>Training &amp; Mentoring</h3>
-          <div class="chip-row">
-            <span class="chip">Curriculum Delivery</span>
-            <span class="chip">Technical Mentoring</span>
-            <span class="chip">Public Speaking</span>
-            <span class="chip">Interview Preparation</span>
-            <span class="chip">Communication Coaching</span>
-            <span class="chip">Leadership Facilitation</span>
-            <span class="chip">Student Assessment</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ACHIEVEMENTS -->
-  <section id="achievements">
-    <div class="wrap">
-      <div class="section-head">
-        <span class="section-tag">// 04 — Achievements</span>
-        <h2>A quick signal check.</h2>
-      </div>
-      <div class="ach-strip">
-        <div class="ach-item"><span class="ach-mark">→</span><p>Trained hundreds of students in robotics, STEM education, and technology-focused learning.</p></div>
-        <div class="ach-item"><span class="ach-mark">→</span><p>Conducted technical and soft skills workshops for engineering students across India.</p></div>
-        <div class="ach-item"><span class="ach-mark">→</span><p>Successfully mentored student innovation projects and technical presentations.</p></div>
-        <div class="ach-item"><span class="ach-mark">→</span><p>Delivered high-impact communication and interview skills training programs.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="wrap contact-grid">
-      <div>
-        <span class="section-tag">// 05 — Contact</span>
-        <h2 style="margin-bottom:16px;">Let's build something worth teaching.</h2>
-        <p style="color:var(--text-muted); max-width:48ch;">Open to Faculty Associate, Robotics Trainer, and STEM Educator roles, as well as project-based training engagements.</p>
-        <div class="contact-links">
-          <a class="contact-row" href="mailto:reddts16@gmail.com">
-            <span class="contact-icon">✉</span>
-            <span class="txt"><span class="k">Email</span><br><span class="v">reddts16@gmail.com</span></span>
-          </a>
-          <a class="contact-row" href="tel:+919010614516">
-            <span class="contact-icon">☎</span>
-            <span class="txt"><span class="k">Phone</span><br><span class="v">+91 90106 14516</span></span>
-          </a>
-          <div class="contact-row" style="cursor:default;">
-            <span class="contact-icon">◎</span>
-            <span class="txt"><span class="k">Location</span><br><span class="v">Guntur, Andhra Pradesh, India</span></span>
-          </div>
-        </div>
-        <div class="lang-strip">
-          <span class="lang-chip">English</span>
-          <span class="lang-chip">Telugu</span>
-          <span class="lang-chip">Hindi</span>
-        </div>
-      </div>
-      <div>
-        <div class="skill-card" style="padding:34px;">
-          <h3 style="margin-bottom:12px;">Prefer a quick brief?</h3>
-          <p style="color:var(--text-muted); font-size:0.94rem; margin-bottom:22px;">Use the Hire Me form and I'll get back to you by email — no back-and-forth needed to get started.</p>
-          <button class="btn btn-primary" style="width:100%; justify-content:center;" id="contactHireBtn">Open Hire Me Form</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-</main>
-
-<footer>
-  <div class="wrap" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:12px;">
-    <p>© 2026 Shiva Reddy — Built for robotics education.</p>
-    <p>Guntur, Andhra Pradesh, India</p>
-  </div>
-</footer>
-
-<!-- HIRE ME MODAL -->
-<div class="modal-overlay" id="modalOverlay">
-  <div class="modal">
-    <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
-    <h3>Hire Me</h3>
-    <p class="sub">Tell me a bit about the role or project — I'll reply directly by email.</p>
-    <div class="activation-note" id="activationNote">
-      <strong>First-time setup:</strong> the very first submission triggers a one-time confirmation email from FormSubmit to reddts16@gmail.com. Open it and click "Activate Form" — after that, every future submission is delivered automatically with no further steps.
-    </div>
-
-    <form id="hireForm" action="https://formsubmit.co/reddts16@gmail.com" method="POST" target="hidden_form_frame">
-      <input type="hidden" name="_subject" value="New Hire Me enquiry — portfolio site">
-      <input type="hidden" name="_template" value="table">
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_next" value="false">
-
-      <div class="form-field">
-        <label for="fName">Name</label>
-        <input type="text" id="fName" name="Name" required placeholder="Your full name">
-      </div>
-      <div class="form-field">
-        <label for="fCompany">Company / Institution</label>
-        <input type="text" id="fCompany" name="Company" required placeholder="Where you're reaching out from">
-      </div>
-      <div class="form-field">
-        <label for="fEmail">Your Email</label>
-        <input type="email" id="fEmail" name="Reply-To" required placeholder="you@example.com">
-      </div>
-      <div class="form-field">
-        <label for="fDetails">Project Details</label>
-        <textarea id="fDetails" name="Project Details" required placeholder="Role, scope, timeline — whatever's useful."></textarea>
-      </div>
-      <button type="submit" class="btn btn-primary form-submit" id="hireSubmitBtn">Send Enquiry</button>
-      <p class="form-note">Sends directly to reddts16@gmail.com via FormSubmit — no account needed.</p>
-    </form>
-    <iframe name="hidden_form_frame" id="hiddenFormFrame" style="display:none;" title="form submission target"></iframe>
-    <div class="form-success" id="formSuccess">
-      ✓ Submitted. Thanks — I'll respond shortly by email.
-    </div>
-    <p class="form-note" style="margin-top:16px;">Prefer email directly? <a href="mailto:reddts16@gmail.com" style="color:var(--accent-teal);">reddts16@gmail.com</a></p>
-  </div>
-</div>
-
-<script>
-  // Accordion
-  document.querySelectorAll('.exp-item').forEach(item=>{
-    const head = item.querySelector('.exp-head');
-    const body = item.querySelector('.exp-body');
-    head.addEventListener('click', ()=>{
-      const isOpen = item.getAttribute('data-open') === 'true';
-      // close others
-      document.querySelectorAll('.exp-item').forEach(other=>{
-        if(other !== item){
-          other.setAttribute('data-open','false');
-          other.querySelector('.exp-body').style.maxHeight = null;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shiva Reddy | Robotics & STEM Educator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        heading: ['Orbitron', 'sans-serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        cyber: {
+                            bg: '#060913',
+                            card: 'rgba(15, 23, 42, 0.85)',
+                            border: 'rgba(56, 189, 248, 0.25)',
+                            accent: '#38bdf8',
+                            neon: '#00f0ff',
+                            purple: '#8b5cf6',
+                            emerald: '#10b981'
+                        }
+                    }
+                }
+            }
         }
-      });
-      if(isOpen){
-        item.setAttribute('data-open','false');
-        body.style.maxHeight = null;
-      } else {
-        item.setAttribute('data-open','true');
-        body.style.maxHeight = body.scrollHeight + 'px';
-      }
-    });
-  });
+    </script>
+    <style>
+        body {
+            background-color: #060913;
+            color: #f8fafc;
+            overflow-x: hidden;
+        }
 
-  // Mobile nav
-  const menuToggle = document.getElementById('menuToggle');
-  const navLinks = document.getElementById('navLinks');
-  menuToggle.addEventListener('click', ()=> navLinks.classList.toggle('open'));
+        /* Custom Background Using Uploaded Image */
+        .hero-background {
+            background: linear-gradient(180deg, rgba(6, 9, 19, 0.75) 0%, rgba(6, 9, 19, 0.92) 100%), 
+                        url('ChatGPT Image Sep 16, 2026, 10_38_15 PM.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
 
-  // In-page section navigation — handled entirely in JS (no native hash
-  // navigation) so it always scrolls on the same page instead of ever
-  // being treated as a link to an external site.
-  document.querySelectorAll('[data-scroll-to]').forEach(link=>{
-    link.addEventListener('click', (e)=>{
-      e.preventDefault();
-      const target = document.getElementById(link.getAttribute('data-scroll-to'));
-      if(target){
-        target.scrollIntoView({ behavior:'smooth', block:'start' });
-      }
-      navLinks.classList.remove('open');
-    });
-  });
+        .section-background {
+            background: linear-gradient(180deg, rgba(6, 9, 19, 0.92) 0%, rgba(6, 9, 19, 0.85) 50%, rgba(6, 9, 19, 0.95) 100%), 
+                        url('ChatGPT Image Sep 16, 2026, 10_38_15 PM.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
 
-  // Modal
-  const overlay = document.getElementById('modalOverlay');
-  const openButtons = [document.getElementById('heroHireBtn'), document.getElementById('navHireBtn'), document.getElementById('contactHireBtn')];
-  const closeBtn = document.getElementById('modalClose');
-  function openModal(e){ if(e) e.preventDefault(); overlay.classList.add('active'); document.body.style.overflow='hidden'; }
-  function closeModal(){ overlay.classList.remove('active'); document.body.style.overflow=''; }
-  openButtons.forEach(btn => btn.addEventListener('click', openModal));
-  closeBtn.addEventListener('click', closeModal);
-  overlay.addEventListener('click', (e)=>{ if(e.target === overlay) closeModal(); });
-  document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeModal(); });
+        .glass-header {
+            background: rgba(6, 9, 19, 0.88);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
 
-  // Form submit — a real POST to a hidden iframe, not fetch(). This avoids
-  // CORS entirely (the browser doesn't need to read the cross-origin
-  // response, it just needs the POST to go through), which is the most
-  // reliable way to use FormSubmit from a static GitHub Pages site.
-  const hireForm = document.getElementById('hireForm');
-  const formSuccess = document.getElementById('formSuccess');
-  const submitBtn = document.getElementById('hireSubmitBtn');
-  const hiddenFrame = document.getElementById('hiddenFormFrame');
-  let formSubmitted = false;
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.82);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7);
+        }
 
-  hireForm.addEventListener('submit', function(){
-    formSubmitted = true;
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Sending…';
-    // Let the browser perform the normal POST to the hidden iframe —
-    // no preventDefault here.
-  });
+        .glass-card {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-  hiddenFrame.addEventListener('load', function(){
-    if(!formSubmitted) return; // ignore the frame's initial blank load
-    formSubmitted = false;
-    hireForm.style.display = 'none';
-    document.getElementById('activationNote').style.display = 'none';
-    formSuccess.style.display = 'block';
-  });
-</script>
+        .glass-card:hover {
+            border-color: rgba(56, 189, 248, 0.5);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 25px -10px rgba(56, 189, 248, 0.3);
+        }
 
+        .text-glow {
+            text-shadow: 0 0 20px rgba(0, 240, 255, 0.6);
+        }
+
+        .led-indicator {
+            animation: pulseGlow 1.8s infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.3; transform: scale(0.92); }
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-slate-100 selection:bg-cyber-accent selection:text-slate-950">
+
+    <!-- Navbar Header -->
+    <header class="fixed top-0 left-0 w-full z-50 glass-header border-b border-cyber-border/30 px-4 sm:px-8 py-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+            <!-- Brand Badge -->
+            <a href="#" class="flex items-center gap-3 shrink-0">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyber-accent to-cyber-purple flex items-center justify-center font-heading font-black text-slate-950 text-xl shadow-md shadow-cyber-accent/30">
+                    SR
+                </div>
+                <div class="hidden sm:block">
+                    <span class="font-heading text-lg font-bold tracking-wider text-white">SHIVA<span class="text-cyber-accent">REDDY</span></span>
+                    <span class="block text-[10px] text-slate-400 tracking-widest uppercase font-mono">Robotics & STEM Trainer</span>
+                </div>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav class="hidden lg:flex items-center gap-8 text-sm font-semibold tracking-wide text-slate-300">
+                <a href="#about" class="hover:text-cyber-accent transition-colors">About</a>
+                <a href="#stats" class="hover:text-cyber-accent transition-colors">Impact</a>
+                <a href="#experience" class="hover:text-cyber-accent transition-colors">Experience</a>
+                <a href="#lab" class="hover:text-cyber-accent transition-colors">Lab Simulator</a>
+                <a href="#skills" class="hover:text-cyber-accent transition-colors">Skills</a>
+                <a href="#contact" class="hover:text-cyber-accent transition-colors">Contact</a>
+            </nav>
+
+            <!-- Navbar Contact Buttons -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <a href="tel:9010614516" class="px-3 sm:px-4 py-2 rounded-xl bg-cyber-accent/10 border border-cyber-accent/40 text-cyber-accent hover:bg-cyber-accent hover:text-slate-950 font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-phone"></i>
+                    <span>9010614516</span>
+                </a>
+                <a href="mailto:reddts16@gmail.com" class="px-3 sm:px-4 py-2 rounded-xl bg-gradient-to-r from-cyber-accent to-cyber-purple text-slate-950 font-bold text-xs uppercase tracking-wider hover:opacity-90 transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-envelope"></i>
+                    <span class="hidden md:inline">Email</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen hero-background pt-32 pb-20 px-4 sm:px-6 flex items-center justify-center">
+        <div class="max-w-5xl mx-auto w-full text-center relative z-10 flex flex-col items-center">
+            
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border border-cyber-accent/30 text-cyber-accent text-xs uppercase tracking-widest font-mono mb-6">
+                <span class="w-2 h-2 rounded-full bg-cyber-neon led-indicator"></span>
+                Alphores Group of Educational Institutions • Trainer
+            </div>
+
+            <h1 class="font-heading text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white tracking-tight leading-tight mb-6">
+                EMPOWERING YOUNG MINDS <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyber-neon via-cyber-accent to-cyber-purple text-glow">
+                    WITH STEM & ROBOTICS
+                </span>
+            </h1>
+
+            <p class="max-w-2xl mx-auto text-slate-200 text-sm sm:text-base md:text-lg font-normal leading-relaxed mb-10">
+                STEM Educator with <span class="text-white font-semibold">3+ Years of Hands-on Experience</span> delivering interactive, project-based robotics, coding, and IoT programs for next-generation innovators.
+            </p>
+
+            <!-- Call-to-Action Grid -->
+            <div class="flex flex-wrap items-center justify-center gap-4 mb-16 w-full max-w-xl">
+                <a href="tel:9010614516" class="flex-1 min-w-[220px] px-6 py-4 rounded-xl bg-cyber-accent text-slate-950 font-heading font-bold text-xs sm:text-sm uppercase tracking-wider hover:bg-white transition-all shadow-lg shadow-cyber-accent/20 flex items-center justify-center gap-3">
+                    <i class="fa-solid fa-phone-flip text-base"></i> Direct Call: 9010614516
+                </a>
+                <a href="mailto:reddts16@gmail.com" class="flex-1 min-w-[200px] px-6 py-4 rounded-xl glass-card text-white font-heading font-bold text-xs sm:text-sm uppercase tracking-wider hover:border-cyber-accent transition-all flex items-center justify-center gap-3">
+                    <i class="fa-solid fa-paper-plane text-cyber-accent"></i> Send Email
+                </a>
+                <a href="https://linkedin.com/in/shiva-reddy-" target="_blank" class="px-6 py-4 rounded-xl glass-card text-slate-300 hover:text-cyber-accent font-heading font-bold text-xs sm:text-sm uppercase tracking-wider transition-all flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-linkedin text-base"></i> LinkedIn
+                </a>
+            </div>
+
+            <!-- Stats Impact Section -->
+            <div id="stats" class="grid grid-cols-2 md:grid-cols-4 gap-4 w-full max-w-4xl">
+                <div class="glass-panel p-5 rounded-2xl text-center border-t-2 border-t-cyber-accent flex flex-col items-center justify-center">
+                    <div class="font-heading text-2xl sm:text-4xl font-black text-cyber-accent">10,000+</div>
+                    <div class="text-[11px] text-slate-300 font-mono tracking-wider uppercase mt-1">Students Mentored</div>
+                </div>
+                <div class="glass-panel p-5 rounded-2xl text-center border-t-2 border-t-cyber-purple flex flex-col items-center justify-center">
+                    <div class="font-heading text-2xl sm:text-4xl font-black text-cyber-purple">500+</div>
+                    <div class="text-[11px] text-slate-300 font-mono tracking-wider uppercase mt-1">Robotics Projects</div>
+                </div>
+                <div class="glass-panel p-5 rounded-2xl text-center border-t-2 border-t-cyber-emerald flex flex-col items-center justify-center">
+                    <div class="font-heading text-2xl sm:text-4xl font-black text-cyber-emerald">3+ Yrs</div>
+                    <div class="text-[11px] text-slate-300 font-mono tracking-wider uppercase mt-1">Training Experience</div>
+                </div>
+                <div class="glass-panel p-5 rounded-2xl text-center border-t-2 border-t-cyber-neon flex flex-col items-center justify-center">
+                    <div class="font-heading text-2xl sm:text-4xl font-black text-cyber-neon">ECE</div>
+                    <div class="text-[11px] text-slate-300 font-mono tracking-wider uppercase mt-1">Engineering Degree</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-4 sm:px-6 section-background border-y border-cyber-border/30">
+        <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-10 items-center">
+            
+            <div class="glass-panel p-6 sm:p-10 rounded-3xl">
+                <span class="text-cyber-accent text-xs font-mono uppercase tracking-widest block mb-2">// PROFESSIONAL PROFILE</span>
+                <h2 class="font-heading text-2xl sm:text-3xl font-bold text-white mb-6">Dedicated STEM Educator & Hardware Developer</h2>
+                
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
+                    I specialize in bridging complex engineering logic with interactive, hands-on learning for young minds. From basic block programming to advanced IoT circuits with ESP32 and Python, I construct customized learning pathways that turn students into creators.
+                </p>
+
+                <div class="space-y-3 font-mono text-xs sm:text-sm">
+                    <div class="flex items-center gap-3 text-slate-300">
+                        <i class="fa-solid fa-check-circle text-cyber-accent text-base"></i>
+                        <span>Robotics Curriculum Design (Arduino, Scratch, MicroPython)</span>
+                    </div>
+                    <div class="flex items-center gap-3 text-slate-300">
+                        <i class="fa-solid fa-check-circle text-cyber-accent text-base"></i>
+                        <span>IoT & Embedded Systems (ESP32, Sensor Interfacing)</span>
+                    </div>
+                    <div class="flex items-center gap-3 text-slate-300">
+                        <i class="fa-solid fa-check-circle text-cyber-accent text-base"></i>
+                        <span>Public Speaking & Communication Skill Mastery</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Info Column -->
+            <div class="space-y-4">
+                <div class="glass-card p-6 rounded-2xl flex items-center justify-between gap-4">
+                    <div>
+                        <div class="text-[10px] text-slate-400 font-mono uppercase tracking-wider">Current Role</div>
+                        <div class="text-base sm:text-lg font-bold text-white mt-1">Robotics & Coding Trainer</div>
+                        <div class="text-xs sm:text-sm text-cyber-accent">Alphores Group of Educational Institutions</div>
+                    </div>
+                    <i class="fa-solid fa-robot text-3xl text-cyber-accent/40 shrink-0"></i>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl flex items-center justify-between gap-4">
+                    <div>
+                        <div class="text-[10px] text-slate-400 font-mono uppercase tracking-wider">Direct Reach</div>
+                        <a href="tel:9010614516" class="text-base sm:text-lg font-bold text-white hover:text-cyber-accent transition-colors block mt-1">+91 9010614516</a>
+                        <a href="mailto:reddts16@gmail.com" class="text-xs sm:text-sm text-cyber-accent hover:underline block">reddts16@gmail.com</a>
+                    </div>
+                    <i class="fa-solid fa-address-card text-3xl text-cyber-purple/40 shrink-0"></i>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl flex items-center justify-between gap-4">
+                    <div>
+                        <div class="text-[10px] text-slate-400 font-mono uppercase tracking-wider">Academic Background</div>
+                        <div class="text-base sm:text-lg font-bold text-white mt-1">B.Tech in ECE</div>
+                        <div class="text-xs sm:text-sm text-slate-400">Electronics & Communication Engineering</div>
+                    </div>
+                    <i class="fa-solid fa-graduation-cap text-3xl text-cyber-emerald/40 shrink-0"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Timeline Section -->
+    <section id="experience" class="py-20 px-4 sm:px-6 max-w-5xl mx-auto">
+        <div class="text-center mb-14">
+            <span class="text-cyber-accent text-xs font-mono uppercase tracking-widest block mb-2">// WORK HISTORY</span>
+            <h2 class="font-heading text-2xl sm:text-4xl font-bold text-white">Teaching & Professional Experience</h2>
+        </div>
+
+        <div class="space-y-6 relative before:absolute before:inset-0 before:left-4 sm:before:left-1/2 before:w-0.5 before:bg-cyber-border/30">
+            <!-- Experience Item 1 -->
+            <div class="relative flex flex-col sm:flex-row items-start">
+                <div class="flex items-center justify-center w-8 h-8 rounded-full bg-cyber-accent text-slate-950 font-bold text-xs absolute left-0 sm:left-1/2 -translate-x-1/2 z-10 shadow-md shadow-cyber-accent/50">1</div>
+                <div class="ml-12 sm:ml-0 sm:w-1/2 sm:pr-8 w-full">
+                    <div class="glass-panel p-6 rounded-2xl border-l-4 border-l-cyber-accent">
+                        <span class="text-[10px] font-mono text-cyber-accent bg-cyber-accent/10 px-2 py-1 rounded">2026 - Present</span>
+                        <h3 class="font-heading text-lg font-bold text-white mt-2">Robotics and Coding Trainer</h3>
+                        <p class="text-slate-400 text-xs mb-3">Alphores Group of Educational Institutions • Full-time</p>
+                        <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+                            Leading comprehensive STEM programs, instructing hardware assembly, microcontrollers, and logic coding for students across campuses.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Experience Item 2 -->
+            <div class="relative flex flex-col sm:flex-row items-start">
+                <div class="flex items-center justify-center w-8 h-8 rounded-full bg-cyber-purple text-slate-950 font-bold text-xs absolute left-0 sm:left-1/2 -translate-x-1/2 z-10 shadow-md shadow-cyber-purple/50">2</div>
+                <div class="ml-12 sm:ml-0 sm:w-1/2 sm:pl-8 sm:ml-auto w-full">
+                    <div class="glass-panel p-6 rounded-2xl border-l-4 border-l-cyber-purple">
+                        <span class="text-[10px] font-mono text-cyber-purple bg-cyber-purple/10 px-2 py-1 rounded">2026</span>
+                        <h3 class="font-heading text-lg font-bold text-white mt-2">Instructor / Robotics Educator</h3>
+                        <p class="text-slate-400 text-xs mb-3">CareCubs • On-site</p>
+                        <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+                            Mentored students on basic robotics, university lecturing modules, micro-controller wiring, and sensor programming.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Experience Item 3 -->
+            <div class="relative flex flex-col sm:flex-row items-start">
+                <div class="flex items-center justify-center w-8 h-8 rounded-full bg-cyber-emerald text-slate-950 font-bold text-xs absolute left-0 sm:left-1/2 -translate-x-1/2 z-10 shadow-md shadow-cyber-emerald/50">3</div>
+                <div class="ml-12 sm:ml-0 sm:w-1/2 sm:pr-8 w-full">
+                    <div class="glass-panel p-6 rounded-2xl border-l-4 border-l-cyber-emerald">
+                        <span class="text-[10px] font-mono text-cyber-emerald bg-cyber-emerald/10 px-2 py-1 rounded">2024 - 2026</span>
+                        <h3 class="font-heading text-lg font-bold text-white mt-2">Senior Public Speaking Expert</h3>
+                        <p class="text-slate-400 text-xs mb-3">PlanetSpark • Remote / On-site</p>
+                        <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+                            Trained students in effective communication, debate, logical structuring, and presentation confidence.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Virtual Hardware Simulator -->
+    <section id="lab" class="py-20 px-4 sm:px-6 bg-slate-950/90 border-t border-cyber-border/30">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-12">
+                <span class="text-cyber-accent text-xs font-mono uppercase tracking-widest block mb-2">// VIRTUAL HARDWARE LAB</span>
+                <h2 class="font-heading text-2xl sm:text-4xl font-bold text-white">Interactive Microcontroller Simulator</h2>
+                <p class="text-slate-400 text-xs sm:text-sm mt-2">Test virtual hardware logic right in your browser</p>
+            </div>
+
+            <div class="glass-panel p-6 sm:p-8 rounded-3xl grid lg:grid-cols-2 gap-8 items-center">
+                <!-- Controls Column -->
+                <div class="space-y-5">
+                    <div>
+                        <label class="block text-[11px] font-mono text-slate-400 mb-2 uppercase tracking-wider">Select Code Language</label>
+                        <select id="code-select" onchange="updateCodeSim()" class="w-full bg-slate-900 border border-cyber-border/60 rounded-xl px-4 py-3 text-xs sm:text-sm text-cyber-accent font-mono focus:outline-none focus:border-cyber-accent">
+                            <option value="arduino">Arduino C++ (Pin 13 LED Blink)</option>
+                            <option value="python">MicroPython (Ultrasonic Sensor Distance)</option>
+                        </select>
+                    </div>
+
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 font-mono text-xs text-slate-300 overflow-x-auto h-44 leading-relaxed" id="code-display">
+                        // Arduino C++ Code
+                        void setup() {
+                          pinMode(13, OUTPUT);
+                        }
+                        void loop() {
+                          digitalWrite(13, HIGH);
+                          delay(1000);
+                          digitalWrite(13, LOW);
+                          delay(1000);
+                        }
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <button onclick="toggleLedSim()" class="flex-1 py-3 bg-cyber-accent text-slate-950 rounded-xl font-bold text-xs uppercase tracking-wider hover:bg-white transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-power-off"></i> Toggle LED Pin 13
+                        </button>
+                        <button onclick="triggerSensorSim()" class="flex-1 py-3 glass-card text-cyber-accent border border-cyber-accent/40 rounded-xl font-bold text-xs uppercase tracking-wider hover:bg-cyber-accent/10 transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-wave-square"></i> Ping Sensor
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Simulator Output Column -->
+                <div class="bg-slate-950 p-6 sm:p-8 rounded-2xl border border-slate-800 flex flex-col items-center justify-center text-center">
+                    <div class="text-[11px] font-mono text-slate-400 mb-6 uppercase tracking-wider">Virtual Hardware Status</div>
+                    
+                    <!-- Virtual LED Component -->
+                    <div class="relative mb-6">
+                        <div id="sim-led" class="w-20 h-20 rounded-full bg-slate-800 border-4 border-slate-700 flex items-center justify-center transition-all duration-300">
+                            <i class="fa-solid fa-lightbulb text-3xl text-slate-600"></i>
+                        </div>
+                        <span id="led-status-badge" class="block text-[11px] font-mono text-slate-400 mt-2">LED OFF</span>
+                    </div>
+
+                    <!-- Serial Monitor Output -->
+                    <div class="w-full bg-slate-900 p-4 rounded-xl border border-slate-800 font-mono text-xs text-left">
+                        <div class="text-slate-500 text-[10px] uppercase mb-1">// Serial Log Output</div>
+                        <div id="serial-log" class="text-cyber-accent h-20 overflow-y-auto space-y-1 text-[11px]">
+                            > Board initialized successfully.<br>
+                            > Ready for logic inputs...
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Matrix Section -->
+    <section id="skills" class="py-20 px-4 sm:px-6 max-w-6xl mx-auto">
+        <div class="text-center mb-14">
+            <span class="text-cyber-accent text-xs font-mono uppercase tracking-widest block mb-2">// TECHNICAL COMPETENCIES</span>
+            <h2 class="font-heading text-2xl sm:text-4xl font-bold text-white">Skills & Core Expertise</h2>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="glass-card p-6 rounded-2xl">
+                <i class="fa-solid fa-microchip text-cyber-accent text-2xl mb-4"></i>
+                <h3 class="font-heading text-base sm:text-lg font-bold text-white mb-3">Hardware & Circuits</h3>
+                <div class="flex flex-wrap gap-2 text-xs font-mono text-slate-300">
+                    <span class="bg-slate-800/80 px-3 py-1.5 rounded-lg border border-slate-700/60">Arduino Uno/Nano</span>
+                    <span class="bg-slate-800/80 px-3 py-1.5 rounded-lg border border-slate-700/60">ESP32 / Wi-Fi</span>
+                    <span class="bg-slate-800/80 px-3 py-1.5 rounded-lg border border-slate-700/60">Raspberry Pi</span>
+                    <span class="bg-slate-800/80 px-3 py-1.5 rounded-lg border border-slate-700/60">Sensors & Actuators</span>
+                </div>
+            </div>
+
+            <div class="glass-card p-6 rounded-2xl">
+                <i class="fa-solid fa-code text-cyber-purple text-2xl mb-4"></i>
+                <h3 class="font-heading text-base sm:text-lg font-bold text-white mb-3">Programming</h3>
+                <div class="flex flex-wrap gap-2 text-xs font-mono text-slate-300">
+                    <span class="bg-slate-800/80 px-3 py-1.5 rounded-lg border border-slate-700/60">Python</span>
+                    <span class="bg-slate-800/80 px-3 py-1.5 rounded-lg border border-slate-700/60">C++ (Embedded)</span>
+                    <span class="bg-slate-800/80 px-3 py-1.5 rounded-lg border border-slate-700/60">Scratch Coding</span>
+                    <span class="bg-slate-800/80 px-3 py-1.5 rounded-lg border border-slate-700/60">MicroPython</span>
+                </div>
+            </div>
+
+            <div class="glass-card p-6 rounded-2xl">
+                <i class="fa-solid fa-chalkboard-user text-cyber-emerald text-2xl mb-4"></i>
+                <h3 class="font-heading text-base sm:text-lg font-bold text-white mb-3">Teaching & Communication</h3>
+                <div class="flex flex-wrap gap-2 text-xs font-mono text-slate-300">
+                    <span class="bg-slate-800/80 px-3 py-1.5 rounded-lg border border-slate-700/60">STEM Curriculum</span>
+                    <span class="bg-slate-800/80 px-3 py-1.5 rounded-lg border border-slate-700/60">Public Speaking</span>
+                    <span class="bg-slate-800/80 px-3 py-1.5 rounded-lg border border-slate-700/60">Student Mentorship</span>
+                    <span class="bg-slate-800/80 px-3 py-1.5 rounded-lg border border-slate-700/60">Classroom Management</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Direct Actions -->
+    <section id="contact" class="py-20 px-4 sm:px-6 bg-slate-950 border-t border-cyber-border/30">
+        <div class="max-w-4xl mx-auto text-center">
+            <span class="text-cyber-accent text-xs font-mono uppercase tracking-widest block mb-2">// GET IN TOUCH</span>
+            <h2 class="font-heading text-2xl sm:text-4xl font-bold text-white mb-4">Start a STEM Collaboration</h2>
+            <p class="text-slate-400 text-xs sm:text-sm max-w-lg mx-auto mb-10">
+                Reach out directly for robotics roles, STEM workshops, faculty training, or institutional consulting.
+            </p>
+
+            <div class="grid sm:grid-cols-3 gap-6">
+                <!-- Direct Call -->
+                <a href="tel:9010614516" class="glass-panel p-6 sm:p-8 rounded-3xl text-center hover:border-cyber-accent transition-all group flex flex-col items-center justify-center">
+                    <div class="w-12 h-12 rounded-2xl bg-cyber-accent/10 text-cyber-accent flex items-center justify-center mb-3 text-xl group-hover:bg-cyber-accent group-hover:text-slate-950 transition-all">
+                        <i class="fa-solid fa-phone"></i>
+                    </div>
+                    <div class="text-[10px] text-slate-400 font-mono uppercase mb-1">Call Directly</div>
+                    <div class="text-base font-bold text-white">9010614516</div>
+                    <div class="text-[11px] text-cyber-accent mt-2 font-mono">Click to Dial</div>
+                </a>
+
+                <!-- Email -->
+                <a href="mailto:reddts16@gmail.com" class="glass-panel p-6 sm:p-8 rounded-3xl text-center hover:border-cyber-purple transition-all group flex flex-col items-center justify-center">
+                    <div class="w-12 h-12 rounded-2xl bg-cyber-purple/10 text-cyber-purple flex items-center justify-center mb-3 text-xl group-hover:bg-cyber-purple group-hover:text-slate-950 transition-all">
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+                    <div class="text-[10px] text-slate-400 font-mono uppercase mb-1">Direct Email</div>
+                    <div class="text-xs sm:text-sm font-bold text-white truncate max-w-full">reddts16@gmail.com</div>
+                    <div class="text-[11px] text-cyber-purple mt-2 font-mono">Click to Mail</div>
+                </a>
+
+                <!-- LinkedIn -->
+                <a href="https://linkedin.com/in/shiva-reddy-" target="_blank" class="glass-panel p-6 sm:p-8 rounded-3xl text-center hover:border-cyber-emerald transition-all group flex flex-col items-center justify-center">
+                    <div class="w-12 h-12 rounded-2xl bg-cyber-emerald/10 text-cyber-emerald flex items-center justify-center mb-3 text-xl group-hover:bg-cyber-emerald group-hover:text-slate-950 transition-all">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </div>
+                    <div class="text-[10px] text-slate-400 font-mono uppercase mb-1">LinkedIn</div>
+                    <div class="text-sm font-bold text-white">in/shiva-reddy-</div>
+                    <div class="text-[11px] text-cyber-emerald mt-2 font-mono">View Profile</div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-6 px-4 text-center text-xs font-mono text-slate-500 border-t border-slate-900">
+        <p>© 2026 Shiva Reddy. All rights reserved. Robotics & STEM Education Trainer.</p>
+    </footer>
+
+    <!-- Hardware Simulator Logic -->
+    <script>
+        let isLedOn = false;
+
+        function updateCodeSim() {
+            const select = document.getElementById('code-select');
+            const display = document.getElementById('code-display');
+            if (select.value === 'arduino') {
+                display.innerText = `// Arduino C++ Code
+void setup() {
+  pinMode(13, OUTPUT);
+}
+void loop() {
+  digitalWrite(13, HIGH);
+  delay(1000);
+  digitalWrite(13, LOW);
+  delay(1000);
+}`;
+            } else {
+                display.innerText = `# MicroPython Ultrasonic Distance Sensor
+from machine import Pin
+import time
+
+trigger = Pin(14, Pin.OUT)
+echo = Pin(12, Pin.IN)
+
+def measure_distance():
+    trigger.value(1)
+    time.sleep_us(10)
+    trigger.value(0)
+    return "Distance: 24.5 cm"`;
+            }
+        }
+
+        function toggleLedSim() {
+            isLedOn = !isLedOn;
+            const led = document.getElementById('sim-led');
+            const badge = document.getElementById('led-status-badge');
+            const log = document.getElementById('serial-log');
+
+            if (isLedOn) {
+                led.className = "w-20 h-20 rounded-full bg-cyber-accent shadow-lg shadow-cyber-accent/80 border-4 border-white flex items-center justify-center transition-all duration-300";
+                badge.innerText = "LED ON (PIN 13 HIGH)";
+                badge.className = "block text-[11px] font-mono text-cyber-accent mt-2 font-bold";
+                log.innerHTML += `<br>> digitalWrite(13, HIGH); [LED illuminated]`;
+            } else {
+                led.className = "w-20 h-20 rounded-full bg-slate-800 border-4 border-slate-700 flex items-center justify-center transition-all duration-300";
+                badge.innerText = "LED OFF";
+                badge.className = "block text-[11px] font-mono text-slate-400 mt-2";
+                log.innerHTML += `<br>> digitalWrite(13, LOW); [LED turned off]`;
+            }
+            log.scrollTop = log.scrollHeight;
+        }
+
+        function triggerSensorSim() {
+            const log = document.getElementById('serial-log');
+            const distance = (Math.random() * 40 + 5).toFixed(1);
+            log.innerHTML += `<br>> [HC-SR04 Sensor Ping]: Distance measured = ${distance} cm`;
+            log.scrollTop = log.scrollHeight;
+        }
+    </script>
 </body>
 </html>
