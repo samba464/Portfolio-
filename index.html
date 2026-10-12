@@ -37,7 +37,6 @@
             overflow-x: hidden;
         }
 
-        /* Custom Background Using Uploaded Image */
         .hero-background {
             background: linear-gradient(180deg, rgba(6, 9, 19, 0.75) 0%, rgba(6, 9, 19, 0.92) 100%), 
                         url('ChatGPT Image Sep 16, 2026, 10_38_15 PM.png');
@@ -121,15 +120,17 @@
                 <a href="#contact" class="hover:text-cyber-accent transition-colors">Contact</a>
             </nav>
 
-            <!-- Navbar Contact Buttons -->
+            <!-- Navbar Action Buttons & Male Voice Integration -->
             <div class="flex items-center gap-2 sm:gap-3">
+                <!-- Voice Assistant Trigger Button -->
+                <button onclick="speakIntro()" id="voice-btn" class="px-3 py-2 rounded-xl bg-cyber-purple/20 border border-cyber-purple/50 text-cyber-purple hover:bg-cyber-purple hover:text-slate-950 font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-2 shadow-md">
+                    <i class="fa-solid fa-volume-high" id="voice-icon"></i>
+                    <span class="hidden sm:inline">Voice Intro</span>
+                </button>
+
                 <a href="tel:9010614516" class="px-3 sm:px-4 py-2 rounded-xl bg-cyber-accent/10 border border-cyber-accent/40 text-cyber-accent hover:bg-cyber-accent hover:text-slate-950 font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-2">
                     <i class="fa-solid fa-phone"></i>
                     <span>9010614516</span>
-                </a>
-                <a href="mailto:reddts16@gmail.com" class="px-3 sm:px-4 py-2 rounded-xl bg-gradient-to-r from-cyber-accent to-cyber-purple text-slate-950 font-bold text-xs uppercase tracking-wider hover:opacity-90 transition-all flex items-center gap-2">
-                    <i class="fa-solid fa-envelope"></i>
-                    <span class="hidden md:inline">Email</span>
                 </a>
             </div>
         </div>
@@ -464,8 +465,69 @@
         <p>© 2026 Shiva Reddy. All rights reserved. Robotics & STEM Education Trainer.</p>
     </footer>
 
-    <!-- Hardware Simulator Logic -->
+    <!-- Interactive Scripts & Voice Integration -->
     <script>
+        // --- Male Voice Text-to-Speech Integration ---
+        let isSpeaking = false;
+
+        function speakIntro() {
+            if (!('speechSynthesis' in window)) {
+                alert("Text-to-speech is not supported by your browser.");
+                return;
+            }
+
+            const synth = window.speechSynthesis;
+            const btnIcon = document.getElementById('voice-icon');
+
+            if (isSpeaking) {
+                synth.cancel();
+                isSpeaking = false;
+                btnIcon.className = "fa-solid fa-volume-high";
+                return;
+            }
+
+            const introText = "Welcome to my interactive robotics portfolio. I am Shiva Reddy, a STEM educator and hardware developer specializing in robotics, IoT, and embedded systems.";
+            const utterThis = new SpeechSynthesisUtterance(introText);
+
+            // Attempt to select a clear male voice
+            const voices = synth.getVoices();
+            const maleVoice = voices.find(voice => 
+                (voice.name.includes('Male') || voice.name.includes('David') || voice.name.includes('Mark') || voice.name.includes('Google US English') || voice.name.includes('James')) && voice.lang.includes('en')
+            );
+            
+            if (maleVoice) {
+                utterThis.voice = maleVoice;
+            }
+
+            utterThis.rate = 1.0;
+            utterThis.pitch = 0.9; // Slightly lower pitch for a male persona tone
+
+            utterThis.onstart = () => {
+                isSpeaking = true;
+                btnIcon.className = "fa-solid fa-volume-xmark led-indicator";
+            };
+
+            utterThis.onend = () => {
+                isSpeaking = false;
+                btnIcon.className = "fa-solid fa-volume-high";
+            };
+
+            utterThis.onerror = () => {
+                isSpeaking = false;
+                btnIcon.className = "fa-solid fa-volume-high";
+            };
+
+            synth.speak(utterThis);
+        }
+
+        // Ensure voices are loaded for browsers that load them asynchronously
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.onvoiceschanged = () => {
+                window.speechSynthesis.getVoices();
+            };
+        }
+
+        // --- Hardware Simulator Logic ---
         let isLedOn = false;
 
         function updateCodeSim() {
@@ -520,8 +582,8 @@ def measure_distance():
 
         function triggerSensorSim() {
             const log = document.getElementById('serial-log');
-            const distance = (Math.random() * 40 + 5).toFixed(1);
-            log.innerHTML += `<br>> [HC-SR04 Sensor Ping]: Distance measured = ${distance} cm`;
+            const randomDist = (Math.random() * 40 + 5).toFixed(1);
+            log.innerHTML += `<br>> HC-SR04 Ping sent... Distance: ${randomDist} cm`;
             log.scrollTop = log.scrollHeight;
         }
     </script>
